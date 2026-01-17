@@ -6,5 +6,11 @@ module.exports = defineConfig([
   expoConfig,
   {
     ignores: ['dist/*'],
+    plugins: {
+      prettier: require('eslint-plugin-prettier'),
+    },
+    rules: {
+      'prettier/prettier': ['error'],
+    },
   },
 ]);
