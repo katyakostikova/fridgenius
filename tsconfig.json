@@ -3,9 +3,27 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "assets": [
+        "./src/assets/*"
+      ],
+      "common": [
+        "./src/common/*"
+      ],
+      "components": [
+        "./src/components/*"
+      ],
+      "helpers": [
+        "./src/helpers/*"
+      ],
+      "hooks": [
+        "./src/hooks/*"
+      ],
+      "navigation": [
+        "./src/navigation/*"
+      ],
+      "screens": [
+        "./src/screens/*"
+      ],
     }
   },
   "include": [
