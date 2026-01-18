@@ -2,28 +2,26 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "assets": [
-        "./src/assets/*"
+        "src/assets/index.ts"
       ],
-      "common": [
-        "./src/common/*"
+      "common/*": [
+        "src/common/*"
       ],
       "components": [
-        "./src/components/*"
-      ],
-      "helpers": [
-        "./src/helpers/*"
+        "src/components/index.ts"
       ],
       "hooks": [
-        "./src/hooks/*"
+        "src/hooks/index.ts"
       ],
       "navigation": [
-        "./src/navigation/*"
+        "src/navigation/index.ts"
       ],
       "screens": [
-        "./src/screens/*"
-      ],
+        "src/screens/index.ts"
+      ]
     }
   },
   "include": [
