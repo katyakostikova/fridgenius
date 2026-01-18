@@ -11,17 +11,35 @@ const Tab = createNativeBottomTabNavigator();
 
 function BottomTabsNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ title: '' }}>
       <Tab.Screen
         name={ScreenName.DASHBOARD_STACK}
         component={DashboardStack}
+        options={{
+          tabBarLabelVisibilityMode: 'unlabeled',
+        }}
       />
-      <Tab.Screen name={ScreenName.FRIDGE_STACK} component={FridgeStack} />
+      <Tab.Screen
+        name={ScreenName.FRIDGE_STACK}
+        component={FridgeStack}
+        options={{
+          tabBarLabelVisibilityMode: 'unlabeled',
+        }}
+      />
       <Tab.Screen
         name={ScreenName.ASSISTANT_STACK}
         component={AssistantStack}
+        options={{
+          tabBarLabelVisibilityMode: 'unlabeled',
+        }}
       />
-      <Tab.Screen name={ScreenName.SETTINGS_STACK} component={SettingsStack} />
+      <Tab.Screen
+        name={ScreenName.SETTINGS_STACK}
+        component={SettingsStack}
+        options={{
+          tabBarLabelVisibilityMode: 'unlabeled',
+        }}
+      />
     </Tab.Navigator>
   );
 }
