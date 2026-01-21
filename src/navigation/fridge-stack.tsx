@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenName } from 'common/enums';
+import { Text } from 'components';
 import { FridgeScreen } from 'screens';
 import { I18nAppText } from 'services';
 
@@ -8,7 +9,11 @@ const Stack = createNativeStackNavigator();
 
 function FridgeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitle: ({ children }) => <Text variant="header">{children}</Text>,
+      }}
+    >
       <Stack.Screen
         name={ScreenName.FRIDGE_SCREEN}
         component={FridgeScreen}
