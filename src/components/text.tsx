@@ -14,7 +14,7 @@ const variantStyles = tv({
       lg: 'text-lg',
       xl: 'text-xl',
     },
-    weigth: {
+    weight: {
       normal: 'font-nunito',
       medium: 'font-nunito-medium',
       semiBold: 'font-nunito-semi-bold',
