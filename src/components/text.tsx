@@ -3,9 +3,9 @@ import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 
 type TextProps = { variant?: 'default' | 'header' } & RNTextProps;
 
-const variantStyles: Record<string, RNTextProps['className']> = {
-  default: 'font-nunito',
-  header: 'font-nunito-bold android:text-2xl ios:text-xl',
+const variantStyles = {
+  default: 'font-nunito color-neutral800',
+  header: 'font-nunito-bold android:text-2xl ios:text-xl color-neutral800',
 };
 
 const Text: FC<TextProps> = ({
