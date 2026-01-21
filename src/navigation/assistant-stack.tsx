@@ -11,7 +11,9 @@ function AssistantStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: ({ children }) => <Text variant="header">{children}</Text>,
+        headerTitle: ({ children }) => (
+          <Text variants={{ type: 'header' }}>{children}</Text>
+        ),
       }}
     >
       <Stack.Screen

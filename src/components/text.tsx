@@ -1,25 +1,39 @@
 import { FC } from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { tv, VariantProps } from 'tailwind-variants';
 
-type TextProps = { variant?: 'default' | 'header' } & RNTextProps;
+const variantStyles = tv({
+  base: 'font-nunito color-neutral800 text-md',
+  variants: {
+    color: {
+      neutral800: 'color-neutral800',
+    },
+    size: {
+      sm: 'text-sm',
+      md: 'text-md',
+      lg: 'text-lg',
+      xl: 'text-xl',
+    },
+    weigth: {
+      normal: 'font-nunito',
+      medium: 'font-nunito-medium',
+      semiBold: 'font-nunito-semi-bold',
+      bold: 'font-nunito-bold',
+    },
+    type: {
+      header: 'font-nunito-bold ios:text-xl android:text-2xl',
+    },
+  },
+});
 
-const variantStyles = {
-  default: 'font-nunito color-neutral800',
-  header: 'font-nunito-bold android:text-2xl ios:text-xl color-neutral800',
-};
+type TextVariants = VariantProps<typeof variantStyles>;
 
-const Text: FC<TextProps> = ({
-  variant = 'default',
-  className,
-  children,
-  ...props
-}) => {
+type TextProps = { variants: TextVariants } & RNTextProps;
+
+const Text: FC<TextProps> = ({ variants, className, children, ...props }) => {
   return (
     <RNText
-      className={`
-        ${variantStyles[variant]}
-        ${className}
-      `}
+      className={`${variantStyles(variants)} ${className ?? ''}`}
       {...props}
     >
       {children}
