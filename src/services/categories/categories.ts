@@ -1,4 +1,4 @@
-import { categoriesTable } from 'src/db';
+import { categoriesTable } from 'db';
 
 import { db } from '../db/db';
 

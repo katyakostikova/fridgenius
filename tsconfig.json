@@ -7,7 +7,7 @@
       "assets": ["src/assets/index.ts"],
       "common/*": ["src/common/*"],
       "components": ["src/components/index.ts"],
-      "db": ["src/services/db/index.ts"],
+      "db": ["src/db/schema.ts"],
       "hooks": ["src/hooks/index.ts"],
       "navigation": ["src/navigation/index.ts"],
       "screens": ["src/screens/index.ts"],
