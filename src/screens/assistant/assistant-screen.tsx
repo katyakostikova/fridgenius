@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Text } from 'react-native';
 
-const AssistantScreen: FC = () => {
+import { AssistantScreenProps } from 'common/types';
+
+const AssistantScreen: FC<AssistantScreenProps> = () => {
   return <Text>Assistant Screen</Text>;
 };
 

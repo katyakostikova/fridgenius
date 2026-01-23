@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Text } from 'react-native';
 
-const DashboardScreen: FC = () => {
+import { DashboardScreenProps } from 'common/types';
+
+const DashboardScreen: FC<DashboardScreenProps> = () => {
   return <Text>Dashboard Screen</Text>;
 };
 

@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ScreenName } from 'common/enums';
+import { BottomTabParamList } from 'common/types';
 import { Icon } from 'components';
 
 import { AssistantStack } from './assistant-stack';
@@ -8,9 +9,9 @@ import { DashboardStack } from './dashboard-stack';
 import { FridgeStack } from './fridge-stack';
 import { SettingsStack } from './settings-stack';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-function BottomTabsNavigator() {
+const BottomTabsNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -56,6 +57,6 @@ function BottomTabsNavigator() {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export { BottomTabsNavigator };

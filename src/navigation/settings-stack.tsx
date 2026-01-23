@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenName } from 'common/enums';
+import { SettingsStackParamList } from 'common/types';
 import { Text } from 'components';
 import { SettingsScreen } from 'screens';
 import { I18nAppText } from 'services';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<SettingsStackParamList>();
 
-function SettingsStack() {
+const SettingsStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -25,6 +26,6 @@ function SettingsStack() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export { SettingsStack };

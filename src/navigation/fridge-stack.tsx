@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenName } from 'common/enums';
+import { FridgeStackParamList } from 'common/types';
 import { Text } from 'components';
 import { FridgeScreen } from 'screens';
 import { I18nAppText } from 'services';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<FridgeStackParamList>();
 
-function FridgeStack() {
+const FridgeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -25,6 +26,6 @@ function FridgeStack() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export { FridgeStack };

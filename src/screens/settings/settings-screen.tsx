@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Text } from 'react-native';
 
-const SettingsScreen: FC = () => {
+import { SettingsScreenProps } from 'common/types';
+
+const SettingsScreen: FC<SettingsScreenProps> = () => {
   return <Text>Settings Screen</Text>;
 };
 

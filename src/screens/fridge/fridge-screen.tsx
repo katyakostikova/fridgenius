@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { Text } from 'react-native';
 
-const FridgeScreen: FC = () => {
+import { FridgeScreenProps } from 'common/types';
+
+const FridgeScreen: FC<FridgeScreenProps> = () => {
   return <Text>Fridge Screen</Text>;
 };
 

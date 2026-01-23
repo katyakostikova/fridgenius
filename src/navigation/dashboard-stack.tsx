@@ -1,13 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenName } from 'common/enums';
+import { DashboardStackParamList } from 'common/types';
 import { Text } from 'components';
 import { DashboardScreen } from 'screens';
 import { I18nAppText } from 'services';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
-function DashboardStack() {
+const DashboardStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -25,6 +26,6 @@ function DashboardStack() {
       />
     </Stack.Navigator>
   );
-}
+};
 
 export { DashboardStack };
