@@ -29,9 +29,15 @@ type SettingsScreenProps = NativeStackScreenProps<
   typeof ScreenName.SETTINGS_SCREEN
 >;
 
+type CategoryScreenProps = NativeStackScreenProps<
+  FridgeStackParamList,
+  typeof ScreenName.CATEGORY_SCREEN
+>;
+
 export type {
   DashboardScreenProps,
   FridgeScreenProps,
   AssistantScreenProps,
   SettingsScreenProps,
+  CategoryScreenProps,
 };

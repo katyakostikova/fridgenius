@@ -10,5 +10,6 @@ export type {
   DashboardScreenProps,
   FridgeScreenProps,
   SettingsScreenProps,
+  CategoryScreenProps,
 } from './navigation/screen-props';
 export type { Category } from './categories/category';

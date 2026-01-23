@@ -3,6 +3,8 @@ const NAVIGATION_TEXT_ENGLISH = {
   fridgeScreenName: 'Fridge',
   assistantScreenName: 'Assistant',
   settingsScreenName: 'Settings',
+  addCategoryScreenName: 'Add Category',
+  editCategoryScreenName: 'Edit Category',
 };
 
 const NAVIGATION_TEXT_UKRAINIAN = {
@@ -10,6 +12,8 @@ const NAVIGATION_TEXT_UKRAINIAN = {
   fridgeScreenName: 'Холодильник',
   assistantScreenName: 'Асистент',
   settingsScreenName: 'Налаштування',
+  addCategoryScreenName: 'Додати категорію',
+  editCategoryScreenName: 'Редагувати категорію',
 };
 
 export { NAVIGATION_TEXT_ENGLISH, NAVIGATION_TEXT_UKRAINIAN };

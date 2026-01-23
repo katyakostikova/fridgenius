@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ScreenName } from 'common/enums';
 import { FridgeStackParamList } from 'common/types';
 import { Text } from 'components';
-import { FridgeScreen } from 'screens';
+import { CategoryScreen, FridgeScreen } from 'screens';
 import { I18nAppText } from 'services';
 
 const Stack = createNativeStackNavigator<FridgeStackParamList>();
@@ -23,6 +23,10 @@ const FridgeStack = () => {
         options={{
           title: I18nAppText.t('fridgeScreenName'),
         }}
+      />
+      <Stack.Screen
+        name={ScreenName.CATEGORY_SCREEN}
+        component={CategoryScreen}
       />
     </Stack.Navigator>
   );
