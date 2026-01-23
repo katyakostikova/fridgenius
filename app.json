@@ -42,9 +42,13 @@
       [
         "expo-localization",
         {
-          "supportedLocales": ["en", "uk"]
+          "supportedLocales": [
+            "en",
+            "uk"
+          ]
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true,

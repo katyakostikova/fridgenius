@@ -14,6 +14,7 @@ module.exports = function (api) {
             assets: './src/assets',
             common: './src/common',
             components: './src/components',
+            db: './src/db',
             hooks: './src/hooks',
             navigation: './src/navigation',
             screens: './src/screens',
@@ -21,6 +22,7 @@ module.exports = function (api) {
           },
         },
       ],
+      ['inline-import', { extensions: ['.sql'] }],
     ],
   };
 };
