@@ -7,16 +7,18 @@ import {
 } from '@expo-google-fonts/nunito';
 import { NavigationContainer } from '@react-navigation/native';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
+import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { getLocales } from 'expo-localization';
 
 import { BottomTabsNavigator } from 'navigation';
-import { db, I18nAppText } from 'services';
+import { db, expoDb, I18nAppText } from 'services';
 
 import migrations from './drizzle/migrations';
 
 I18nAppText.locale = getLocales()[0].languageCode ?? 'en';
 
 export default function App() {
+  useDrizzleStudio(expoDb);
   // TODO: add case for error
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { success, error } = useMigrations(db, migrations);
