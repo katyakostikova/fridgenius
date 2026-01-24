@@ -21,8 +21,8 @@ class Categories {
       .where(eq(categoriesTable.name, name));
   };
 
-  create = async (name: string) => {
-    return await db.insert(categoriesTable).values({ name }).returning();
+  create = (name: string) => {
+    return db.insert(categoriesTable).values({ name }).returning();
   };
 
   update = ({ id, name }: Category) => {
