@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { ScreenName } from 'common/enums';
+import { AppColor, ScreenName } from 'common/enums';
 import { SettingsStackParamList } from 'common/types';
 import { Text } from 'components';
 import { SettingsScreen } from 'screens';
@@ -13,8 +13,13 @@ const SettingsStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerTitle: ({ children }) => (
-          <Text variants={{ type: 'header' }}>{children}</Text>
+          <Text variants={{ type: 'header', color: 'neutral50' }}>
+            {children}
+          </Text>
         ),
+        headerStyle: {
+          backgroundColor: AppColor.PRIMARY_500,
+        },
       }}
     >
       <Stack.Screen

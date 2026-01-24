@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { ScreenName } from 'common/enums';
+import { AppColor, ScreenName } from 'common/enums';
 import { BottomTabParamList } from 'common/types';
 import { Icon } from 'components';
 
@@ -17,6 +17,12 @@ const BottomTabsNavigator = () => {
       screenOptions={{
         tabBarLabel: () => null,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: AppColor.PRIMARY_500,
+          paddingTop: 8,
+        },
+        tabBarActiveTintColor: AppColor.NEUTRAL_50,
+        tabBarInactiveTintColor: AppColor.NEUTRAL_300,
       }}
     >
       <Tab.Screen
