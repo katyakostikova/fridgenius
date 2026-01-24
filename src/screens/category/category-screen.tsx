@@ -1,9 +1,9 @@
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { Button, ScrollView, Text, TextInput } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { CategoryScreenProps } from 'common/types';
-import { ScreenWrapper } from 'components';
+import { Input, ScreenWrapper, Text, Button } from 'components';
 import { categoriesService, I18nAppText } from 'services';
 
 const CategoryScreen: FC<CategoryScreenProps> = ({ route, navigation }) => {
@@ -23,7 +23,7 @@ const CategoryScreen: FC<CategoryScreenProps> = ({ route, navigation }) => {
     let error = null;
 
     if (trimmedName.length === 0) {
-      error = 'Category name cannot be empty';
+      error = I18nAppText.t('categoryEmptyName');
       setError(error);
       return error;
     }
@@ -31,7 +31,7 @@ const CategoryScreen: FC<CategoryScreenProps> = ({ route, navigation }) => {
     const existingCategories = await categoriesService.getByName(trimmedName);
 
     if (existingCategories.length > 0) {
-      error = 'Category name already exists';
+      error = I18nAppText.t('categoryTakenName');
       setError(error);
       return error;
     }
@@ -76,14 +76,23 @@ const CategoryScreen: FC<CategoryScreenProps> = ({ route, navigation }) => {
   return (
     <ScreenWrapper>
       <ScrollView keyboardShouldPersistTaps="handled">
-        <Text>Category</Text>
-        <TextInput
-          value={name}
-          onChangeText={setName}
-          onEndEditing={validateInput}
+        <View className="mb-3">
+          <Text className="mb-2" variants={{ type: 'label' }}>
+            {I18nAppText.t('category')}
+          </Text>
+          <Input
+            className="mb-2"
+            value={name}
+            onChangeText={setName}
+            onEndEditing={validateInput}
+          />
+          {error && <Text variants={{ color: 'error' }}>{error}</Text>}
+        </View>
+        <Button
+          type="filled"
+          title={I18nAppText.t('save')}
+          onPress={handleSaveCategory}
         />
-        {error && <Text style={{ color: 'red' }}>{error}</Text>}
-        <Button title={I18nAppText.t('save')} onPress={handleSaveCategory} />
       </ScrollView>
     </ScreenWrapper>
   );

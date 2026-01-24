@@ -7,6 +7,9 @@ const variantStyles = tv({
   variants: {
     color: {
       neutral800: 'color-neutral800',
+      error: 'color-error500',
+      secondary500: 'color-secondary500',
+      neutral50: 'color-neutral50',
     },
     size: {
       sm: 'text-sm',
@@ -22,13 +25,14 @@ const variantStyles = tv({
     },
     type: {
       header: 'font-nunito-bold ios:text-xl android:text-2xl',
+      label: 'font-nunito-semi-bold text-lg',
     },
   },
 });
 
 type TextVariants = VariantProps<typeof variantStyles>;
 
-type TextProps = { variants: TextVariants } & RNTextProps;
+type TextProps = { variants?: TextVariants } & RNTextProps;
 
 const Text: FC<TextProps> = ({ variants, className, children, ...props }) => {
   return (
