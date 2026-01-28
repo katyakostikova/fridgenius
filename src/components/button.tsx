@@ -1,5 +1,5 @@
 import { ComponentProps, FC, useMemo } from 'react';
-import { Pressable, PressableProps } from 'react-native';
+import { Pressable, PressableProps, StyleSheet } from 'react-native';
 import { tv, VariantProps } from 'tailwind-variants';
 
 import { Text } from './text';
@@ -8,9 +8,9 @@ const variantStyles = tv({
   base: 'border border-transparent rounded-md items-center justify-center px-4 py-3',
   variants: {
     type: {
-      filled: 'bg-secondary500',
-      outlined: 'border-secondary500 bg-neutral50',
-      ghost: 'bg-transparent',
+      filled: 'bg-secondary500 active:bg-secondary600',
+      outlined: 'border-secondary500 bg-neutral50 active:opacity-60',
+      ghost: 'bg-transparent active:opacity-60',
     },
   },
 });
@@ -30,6 +30,7 @@ const Button: FC<ButtonProps> = ({ type, className, title, ...props }) => {
       weight: 'bold',
       size: 'lg',
     };
+
     switch (type) {
       case 'outlined':
         return { ...base, color: 'secondary500' };
@@ -43,6 +44,7 @@ const Button: FC<ButtonProps> = ({ type, className, title, ...props }) => {
 
   return (
     <Pressable
+      style={({ pressed }) => [pressed && styles.pressed]}
       className={`${variantStyles({ type })} ${className ?? ''}`}
       {...props}
     >
@@ -50,5 +52,11 @@ const Button: FC<ButtonProps> = ({ type, className, title, ...props }) => {
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.7,
+  },
+});
 
 export { Button };

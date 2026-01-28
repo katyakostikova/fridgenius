@@ -48,6 +48,8 @@ module.exports = {
         secondary300: AppColor.SECONDARY_300,
         secondary400: AppColor.SECONDARY_400,
         secondary500: AppColor.SECONDARY_500,
+        secondary600: AppColor.SECONDARY_600,
+        secondary700: AppColor.SECONDARY_700,
 
         success500: AppColor.SUCCESS_500,
         warning500: AppColor.WARNING_500,
