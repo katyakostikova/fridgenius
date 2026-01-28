@@ -13,7 +13,7 @@ const Fab: FC<FabProps> = ({ onPress, className, ...props }) => {
   return (
     <Pressable
       onPress={onPress}
-      className={`items-center justify-center bg-secondary500 p-4 rounded-full shadow-md active:bg-secondary600 ${className ?? ''}`}
+      className={`items-center justify-center w-20 h-20 bg-secondary500 rounded-full shadow-md active:opacity-70 ${className ?? ''}`}
       {...props}
     >
       <Icon name="plus" color={AppColor.NEUTRAL_100} size={30} />

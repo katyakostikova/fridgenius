@@ -4,3 +4,4 @@ export { Fab } from './fab';
 export { ScreenWrapper } from './screen-wrapper';
 export { Input } from './input';
 export { Button } from './button';
+export { FabWithOptions } from './fab-with-options';

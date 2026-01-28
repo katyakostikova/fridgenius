@@ -8,9 +8,9 @@ const variantStyles = tv({
   base: 'border border-transparent rounded-md items-center justify-center px-4 py-3',
   variants: {
     type: {
-      filled: 'bg-secondary500 active:bg-secondary600',
-      outlined: 'border-secondary500 bg-neutral50 active:opacity-60',
-      ghost: 'bg-transparent active:opacity-60',
+      filled: 'bg-secondary500 active:opacity-70',
+      outlined: 'border-secondary500 bg-neutral50 active:opacity-70',
+      ghost: 'bg-transparent active:opacity-70',
     },
   },
 });

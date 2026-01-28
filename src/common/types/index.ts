@@ -13,3 +13,4 @@ export type {
   CategoryScreenProps,
 } from './navigation/screen-props';
 export type { Category } from './categories/category';
+export type { IconName } from './ui/icon-name';

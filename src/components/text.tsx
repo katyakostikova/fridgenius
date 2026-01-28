@@ -9,6 +9,7 @@ const variantStyles = tv({
       error: 'color-error500',
       secondary500: 'color-secondary500',
       neutral50: 'color-neutral50',
+      neutral600: 'color-neutral600',
     },
     size: {
       sm: 'text-sm',
