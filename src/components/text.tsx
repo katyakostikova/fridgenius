@@ -3,7 +3,6 @@ import { Text as RNText, TextProps as RNTextProps } from 'react-native';
 import { tv, VariantProps } from 'tailwind-variants';
 
 const variantStyles = tv({
-  base: 'font-nunito color-neutral800 text-md',
   variants: {
     color: {
       neutral800: 'color-neutral800',
@@ -27,6 +26,11 @@ const variantStyles = tv({
       header: 'font-nunito-bold ios:text-xl android:text-2xl',
       label: 'font-nunito-semi-bold text-lg',
     },
+  },
+  defaultVariants: {
+    color: 'neutral800',
+    size: 'md',
+    weight: 'normal',
   },
 });
 
