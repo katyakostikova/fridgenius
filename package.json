@@ -19,6 +19,7 @@
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
+    "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",
     "expo": "~54.0.31",
     "expo-constants": "~18.0.13",

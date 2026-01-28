@@ -15,6 +15,7 @@ module.exports = function (api) {
             common: './src/common',
             components: './src/components',
             db: './src/db',
+            helpers: './src/helpers',
             hooks: './src/hooks',
             navigation: './src/navigation',
             screens: './src/screens',
