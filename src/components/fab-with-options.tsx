@@ -39,6 +39,7 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
               <Fragment key={item.name}>
                 <Pressable
                   key={item.name}
+                  onPress={item.onPress}
                   className="flex-row items-center active:opacity-70 px-1"
                 >
                   <Icon

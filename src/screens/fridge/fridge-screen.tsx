@@ -5,7 +5,7 @@ import { FlatList, Text } from 'react-native';
 import { ScreenName } from 'common/enums';
 import { FridgeScreenProps, IconName } from 'common/types';
 import { FabWithOptions, ScreenWrapper } from 'components';
-import { categoriesService } from 'services';
+import { categoriesService, I18nAppText } from 'services';
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const { data: categories } = useLiveQuery(categoriesService.getAll());
@@ -20,12 +20,12 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const fabOptions = useMemo(
     () => [
       {
-        name: 'Add Category',
+        name: I18nAppText.t('addCategory'),
         iconName: 'format-list-bulleted' as IconName,
         onPress: () => handleNavigateToCategoryScreen(),
       },
       {
-        name: 'Add Item',
+        name: I18nAppText.t('addItem'),
         iconName: 'food-apple' as IconName,
         onPress: () => {
           // TODO: add item screen
