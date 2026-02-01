@@ -16,10 +16,12 @@
   "dependencies": {
     "@expo-google-fonts/nunito": "^0.4.2",
     "@expo/vector-icons": "^15.0.3",
+    "@react-native-community/datetimepicker": "8.4.4",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
     "drizzle-orm": "^0.45.1",
     "expo": "~54.0.31",
     "expo-constants": "~18.0.13",

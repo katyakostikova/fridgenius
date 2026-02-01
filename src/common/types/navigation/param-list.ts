@@ -9,6 +9,7 @@ type DashboardStackParamList = {
 type FridgeStackParamList = {
   [ScreenName.FRIDGE_SCREEN]: undefined;
   [ScreenName.CATEGORY_SCREEN]: { categoryId?: number };
+  [ScreenName.ITEM_SCREEN]: { itemId?: number };
 };
 
 type AssistantStackParamList = {

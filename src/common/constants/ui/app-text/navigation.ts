@@ -3,8 +3,10 @@ const NAVIGATION_TEXT_ENGLISH = {
   fridgeScreenName: 'Fridge',
   assistantScreenName: 'Assistant',
   settingsScreenName: 'Settings',
-  addCategoryScreenName: 'Add Category',
-  editCategoryScreenName: 'Edit Category',
+  addCategoryScreenName: 'Add category',
+  editCategoryScreenName: 'Edit category',
+  addItemScreenName: 'Add item',
+  editItemScreenName: 'Edit item',
 };
 
 const NAVIGATION_TEXT_UKRAINIAN = {
@@ -14,6 +16,8 @@ const NAVIGATION_TEXT_UKRAINIAN = {
   settingsScreenName: 'Налаштування',
   addCategoryScreenName: 'Додати категорію',
   editCategoryScreenName: 'Редагувати категорію',
+  addItemScreenName: 'Додати продукт',
+  editItemScreenName: 'Редагувати продукт',
 };
 
 export { NAVIGATION_TEXT_ENGLISH, NAVIGATION_TEXT_UKRAINIAN };

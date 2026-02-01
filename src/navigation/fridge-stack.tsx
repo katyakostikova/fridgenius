@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenName } from 'common/enums';
 import { FridgeStackParamList } from 'common/types';
-import { CategoryScreen, FridgeScreen } from 'screens';
+import { CategoryScreen, FridgeScreen, ItemScreen } from 'screens';
 import { I18nAppText } from 'services';
 
 import { DEFAULT_STACK_SCREEN_OPTIONS } from './default-stack-screen-options';
@@ -23,6 +23,7 @@ const FridgeStack = () => {
         name={ScreenName.CATEGORY_SCREEN}
         component={CategoryScreen}
       />
+      <Stack.Screen name={ScreenName.ITEM_SCREEN} component={ItemScreen} />
     </Stack.Navigator>
   );
 };

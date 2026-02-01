@@ -11,6 +11,7 @@ export type {
   FridgeScreenProps,
   SettingsScreenProps,
   CategoryScreenProps,
+  ItemScreenProps,
 } from './navigation/screen-props';
 export type { Category } from './categories/category';
 export type { IconName } from './ui/icon-name';

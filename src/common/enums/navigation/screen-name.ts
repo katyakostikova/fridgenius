@@ -9,6 +9,7 @@ const ScreenName = {
   ASSISTANT_SCREEN: 'AssistantScreen',
   SETTINGS_SCREEN: 'SettingsScreen',
   CATEGORY_SCREEN: 'CategoryScreen',
+  ITEM_SCREEN: 'ItemScreen',
 } as const;
 
 export { ScreenName };

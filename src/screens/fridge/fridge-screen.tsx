@@ -17,6 +17,13 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
     [navigation],
   );
 
+  const handleNavigateToItemScreen = useCallback(
+    (itemId?: number) => {
+      navigation.navigate(ScreenName.ITEM_SCREEN, { itemId });
+    },
+    [navigation],
+  );
+
   const fabOptions = useMemo(
     () => [
       {
@@ -27,12 +34,10 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
       {
         name: I18nAppText.t('addItem'),
         iconName: 'food-apple' as IconName,
-        onPress: () => {
-          // TODO: add item screen
-        },
+        onPress: () => handleNavigateToItemScreen(),
       },
     ],
-    [handleNavigateToCategoryScreen],
+    [handleNavigateToCategoryScreen, handleNavigateToItemScreen],
   );
 
   return (
