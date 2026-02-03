@@ -24,9 +24,12 @@ const CheckBox: FC<InputProps> = ({
     <View className={cn('flex-row items-center', className)} {...props}>
       <Pressable
         onPress={onCheck}
-        className="p-2 bg-secondary500 rounded-sm active:bg-secondary600"
+        className={cn(
+          'w-7 h-7 items-center justify-center bg-neutral50 rounded-md active:bg-neutral100 border border-neutral300 mr-2',
+          value ? 'bg-secondary500 active:bg-secondary600 border-0' : '',
+        )}
       >
-        {value && <Icon name="check" color={AppColor.NEUTRAL_50} />}
+        {value && <Icon name="check-bold" color={AppColor.NEUTRAL_50} />}
       </Pressable>
       <Text variants={{ type: 'label' }}>{label}</Text>
     </View>
