@@ -1,6 +1,8 @@
 import { ComponentProps, FC, useMemo } from 'react';
-import { Pressable, PressableProps, StyleSheet } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 import { tv, VariantProps } from 'tailwind-variants';
+
+import { cn } from 'helpers';
 
 import { Text } from './text';
 
@@ -43,20 +45,10 @@ const Button: FC<ButtonProps> = ({ type, className, title, ...props }) => {
   }, [type]);
 
   return (
-    <Pressable
-      style={({ pressed }) => [pressed && styles.pressed]}
-      className={`${variantStyles({ type })} ${className ?? ''}`}
-      {...props}
-    >
+    <Pressable className={cn(variantStyles({ type }), className)} {...props}>
       <Text variants={textVariants}>{title}</Text>
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  pressed: {
-    opacity: 0.7,
-  },
-});
 
 export { Button };
