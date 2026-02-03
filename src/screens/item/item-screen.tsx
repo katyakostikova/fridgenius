@@ -40,10 +40,12 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
       <Input value={item.name} />
       <Text variants={{ type: 'label' }}>Date added</Text>
       <DatePickerInput
+        value={item.dateAdded}
         onChangeDate={(value) => handleChangeDate({ key: 'dateAdded', value })}
       />
       <Text variants={{ type: 'label' }}>Expiration date</Text>
       <DatePickerInput
+        value={item.expDate}
         onChangeDate={(value) => handleChangeDate({ key: 'expDate', value })}
       />
     </ScreenWrapper>
