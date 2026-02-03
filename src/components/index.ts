@@ -7,3 +7,4 @@ export { Button } from './button';
 export { FabWithOptions } from './fab-with-options';
 export { DatePickerInput } from './date-picker';
 export { CheckBox } from './check-box';
+export { Selector } from './selector';

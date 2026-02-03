@@ -1,17 +1,18 @@
 import { FC, useLayoutEffect, useState } from 'react';
 
 import { UnitOfMeasurement } from 'common/enums';
-import { ItemScreenProps } from 'common/types';
+import { Item, ItemScreenProps } from 'common/types';
 import {
   CheckBox,
   DatePickerInput,
   Input,
   ScreenWrapper,
+  Selector,
   Text,
 } from 'components';
 import { I18nAppText } from 'services';
 
-const ITEM_INITIAL_VALUES = {
+const ITEM_INITIAL_VALUES: Partial<Item> = {
   categoryId: undefined,
   dateAdded: undefined,
   expDate: undefined,
@@ -20,6 +21,12 @@ const ITEM_INITIAL_VALUES = {
   quantity: undefined,
   unitOfMeasure: UnitOfMeasurement.PIECE,
 };
+
+const testOprtions = [
+  { key: 1, name: 'Cat1' },
+  { key: 2, name: 'Cat2' },
+  { key: 3, name: 'Cat3' },
+];
 
 const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   const { itemId } = route.params ?? {};
@@ -30,6 +37,10 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
 
   const handleChangeDate = ({ key, value }: { key: string; value: string }) => {
     setItem((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleChangeCategory = (categoryId: number | string) => {
+    setItem((prev) => ({ ...prev, categoryId: +categoryId }));
   };
 
   const handleChangeIsPermanent = () => {
@@ -49,7 +60,7 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
       <Text variants={{ type: 'label' }}>Name</Text>
       <Input value={item.name} />
       <Text variants={{ type: 'label' }}>Quantity</Text>
-      <Input value={item.quantity} />
+      <Input value={String(item.quantity ?? 0)} keyboardType="decimal-pad" />
       <Text variants={{ type: 'label' }}>Date added</Text>
       <DatePickerInput
         value={item.dateAdded}
@@ -60,11 +71,16 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
         value={item.expDate}
         onChangeDate={(value) => handleChangeDate({ key: 'expDate', value })}
       />
-      <Text variants={{ type: 'label' }}>Expiration date</Text>
       <CheckBox
         value={item.isPermanent}
         onCheck={handleChangeIsPermanent}
         label="Should always be present"
+      />
+      <Text variants={{ type: 'label' }}>Category</Text>
+      <Selector
+        options={testOprtions}
+        value={item.categoryId}
+        onSelect={handleChangeCategory}
       />
     </ScreenWrapper>
   );

@@ -8,13 +8,13 @@ import { Icon } from './icon';
 import { Text } from './text';
 
 type InputProps = {
-  value: boolean;
+  value: boolean | undefined | null;
   label: string;
   onCheck: () => void;
 } & ViewProps;
 
 const CheckBox: FC<InputProps> = ({
-  value,
+  value = false,
   label,
   className,
   onCheck,
