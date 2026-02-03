@@ -5,10 +5,10 @@ import { Item, ItemScreenProps } from 'common/types';
 import {
   CheckBox,
   DatePickerInput,
+  FormField,
   Input,
   ScreenWrapper,
   Selector,
-  Text,
 } from 'components';
 import { I18nAppText } from 'services';
 
@@ -56,32 +56,39 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   }, [isEditScreen, navigation]);
 
   return (
-    <ScreenWrapper>
-      <Text variants={{ type: 'label' }}>Name</Text>
-      <Input value={item.name} />
-      <Text variants={{ type: 'label' }}>Quantity</Text>
-      <Input value={String(item.quantity ?? 0)} keyboardType="decimal-pad" />
-      <Text variants={{ type: 'label' }}>Date added</Text>
-      <DatePickerInput
-        value={item.dateAdded}
-        onChangeDate={(value) => handleChangeDate({ key: 'dateAdded', value })}
-      />
-      <Text variants={{ type: 'label' }}>Expiration date</Text>
-      <DatePickerInput
-        value={item.expDate}
-        onChangeDate={(value) => handleChangeDate({ key: 'expDate', value })}
-      />
+    <ScreenWrapper className="gap-4">
+      <FormField label="Name">
+        <Input value={item.name} />
+      </FormField>
+      <FormField label="Quantity">
+        <Input value={String(item.quantity ?? 0)} keyboardType="decimal-pad" />
+      </FormField>
+      <FormField label="Date added">
+        <DatePickerInput
+          value={item.dateAdded}
+          onChangeDate={(value) =>
+            handleChangeDate({ key: 'dateAdded', value })
+          }
+        />
+      </FormField>
+      <FormField label="Expiration date">
+        <DatePickerInput
+          value={item.expDate}
+          onChangeDate={(value) => handleChangeDate({ key: 'expDate', value })}
+        />
+      </FormField>
       <CheckBox
         value={item.isPermanent}
         onCheck={handleChangeIsPermanent}
         label="Should always be present"
       />
-      <Text variants={{ type: 'label' }}>Category</Text>
-      <Selector
-        options={testOprtions}
-        value={item.categoryId}
-        onSelect={handleChangeCategory}
-      />
+      <FormField label="Category">
+        <Selector
+          options={testOprtions}
+          value={item.categoryId}
+          onSelect={handleChangeCategory}
+        />
+      </FormField>
     </ScreenWrapper>
   );
 };
