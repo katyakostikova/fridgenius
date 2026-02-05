@@ -1,8 +1,8 @@
-import { FC, useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, useLayoutEffect } from 'react';
 import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 
 import { UnitOfMeasurement } from 'common/enums';
-import { Item, ItemScreenProps, SelectorOption, ValueOf } from 'common/types';
+import { ItemScreenProps } from 'common/types';
 import {
   Button,
   CheckBox,
@@ -11,19 +11,12 @@ import {
   Input,
   ScreenWrapper,
   Selector,
+  Text,
 } from 'components';
 import { checkIsIos } from 'helpers';
-import { categoriesService, I18nAppText, itemsService } from 'services';
+import { I18nAppText } from 'services';
 
-const ITEM_INITIAL_VALUES: Partial<Item> = {
-  categoryId: undefined,
-  dateAdded: undefined,
-  expDate: undefined,
-  isPermanent: false,
-  name: undefined,
-  quantity: undefined,
-  unitOfMeasure: UnitOfMeasurement.PIECE,
-};
+import { useItemForm } from './hooks/item-form';
 
 const UNIT_OPTIONS = [
   {
@@ -50,98 +43,17 @@ const UNIT_OPTIONS = [
 
 const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   const { itemId } = route.params ?? {};
-  const isEditScreen = !!itemId;
-
-  // TODO: set item data if edit
-  const [categoryOptions, setCategoryOptions] = useState<SelectorOption[]>([]);
-  const [item, setItem] = useState(() => ITEM_INITIAL_VALUES);
-
-  const handleChangeInput = ({
-    key,
-    value,
-  }: {
-    key: string;
-    value: string;
-  }) => {
-    setItem((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleChangeUnit = (unitOfMeasure: number | string) => {
-    setItem((prev) => ({
-      ...prev,
-      unitOfMeasure: unitOfMeasure as ValueOf<typeof UnitOfMeasurement>,
-    }));
-  };
-
-  const handleChangeCategory = (categoryId: number | string) => {
-    setItem((prev) => ({ ...prev, categoryId: +categoryId }));
-  };
-
-  const handleChangeIsPermanent = () => {
-    setItem((prev) => ({ ...prev, isPermanent: !prev.isPermanent }));
-  };
-
-  const handleGetAllCategories = useCallback(async () => {
-    const data = await categoriesService.getAll();
-
-    const options = data.map((item) => ({
-      key: item.id,
-      name: item.name,
-    }));
-    setCategoryOptions(options);
-  }, []);
-
-  const validateForm = async () => {
-    const trimmedName = item.name?.trim();
-
-    if (!trimmedName) {
-      return I18nAppText.t('itemEmptyName');
-    }
-
-    const existingItems = await itemsService.getByName(trimmedName);
-
-    if (existingItems.length > 0) {
-      return I18nAppText.t('itemTakenName');
-    }
-
-    if (!item.quantity) {
-      return I18nAppText.t('itemEmptyQuantity');
-    }
-
-    if (!item.categoryId) {
-      return I18nAppText.t('itemSelectCategory');
-    }
-
-    if (!item.dateAdded) {
-      return I18nAppText.t('itemEmptyDateAdded');
-    }
-  };
-
-  const resetForm = () => {
-    setItem(ITEM_INITIAL_VALUES);
-  };
-
-  const handleSaveItem = async () => {
-    const error = await validateForm();
-
-    if (error) {
-      return;
-    }
-
-    // TODO: toast message if error occurs
-    if (isEditScreen) {
-      await itemsService.update({ id: itemId, ...item } as Item);
-    } else {
-      console.log('here');
-      await itemsService.create(item as Omit<Item, 'id'>);
-    }
-
-    if (isEditScreen) {
-      navigation.goBack();
-    } else {
-      resetForm();
-    }
-  };
+  const {
+    categoryOptions,
+    error,
+    handleChangeCategory,
+    handleChangeInput,
+    handleChangeIsPermanent,
+    handleChangeUnit,
+    handleSaveItem,
+    isEditScreen,
+    item,
+  } = useItemForm({ itemId });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -150,10 +62,6 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
         : I18nAppText.t('addItemScreenName'),
     });
   }, [isEditScreen, navigation]);
-
-  useEffect(() => {
-    handleGetAllCategories();
-  }, [handleGetAllCategories]);
 
   return (
     <ScreenWrapper>
@@ -216,6 +124,7 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
             onCheck={handleChangeIsPermanent}
             label={I18nAppText.t('shouldAlwaysBePresent')}
           />
+          {error && <Text variants={{ color: 'error' }}>{error}</Text>}
           <Button title={I18nAppText.t('save')} onPress={handleSaveItem} />
         </KeyboardAvoidingView>
       </ScrollView>
