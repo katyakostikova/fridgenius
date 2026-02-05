@@ -26,7 +26,12 @@ type ButtonProps = {
 
 type TextVariant = ComponentProps<typeof Text>['variants'];
 
-const Button: FC<ButtonProps> = ({ type, className, title, ...props }) => {
+const Button: FC<ButtonProps> = ({
+  type = 'filled',
+  className,
+  title,
+  ...props
+}) => {
   const textVariants: TextVariant = useMemo(() => {
     const base: TextVariant = {
       weight: 'bold',

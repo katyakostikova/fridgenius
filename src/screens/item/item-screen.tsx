@@ -4,6 +4,7 @@ import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { UnitOfMeasurement } from 'common/enums';
 import { Item, ItemScreenProps, SelectorOption, ValueOf } from 'common/types';
 import {
+  Button,
   CheckBox,
   DatePickerInput,
   FormField,
@@ -12,7 +13,7 @@ import {
   Selector,
 } from 'components';
 import { checkIsIos } from 'helpers';
-import { categoriesService, I18nAppText } from 'services';
+import { categoriesService, I18nAppText, itemsService } from 'services';
 
 const ITEM_INITIAL_VALUES: Partial<Item> = {
   categoryId: undefined,
@@ -55,7 +56,13 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   const [categoryOptions, setCategoryOptions] = useState<SelectorOption[]>([]);
   const [item, setItem] = useState(() => ITEM_INITIAL_VALUES);
 
-  const handleChangeDate = ({ key, value }: { key: string; value: string }) => {
+  const handleChangeInput = ({
+    key,
+    value,
+  }: {
+    key: string;
+    value: string;
+  }) => {
     setItem((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -84,6 +91,58 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
     setCategoryOptions(options);
   }, []);
 
+  const validateForm = async () => {
+    const trimmedName = item.name?.trim();
+
+    if (!trimmedName) {
+      return I18nAppText.t('itemEmptyName');
+    }
+
+    const existingItems = await itemsService.getByName(trimmedName);
+
+    if (existingItems.length > 0) {
+      return I18nAppText.t('itemTakenName');
+    }
+
+    if (!item.quantity) {
+      return I18nAppText.t('itemEmptyQuantity');
+    }
+
+    if (!item.categoryId) {
+      return I18nAppText.t('itemSelectCategory');
+    }
+
+    if (!item.dateAdded) {
+      return I18nAppText.t('itemEmptyDateAdded');
+    }
+  };
+
+  const resetForm = () => {
+    setItem(ITEM_INITIAL_VALUES);
+  };
+
+  const handleSaveItem = async () => {
+    const error = await validateForm();
+
+    if (error) {
+      return;
+    }
+
+    // TODO: toast message if error occurs
+    if (isEditScreen) {
+      await itemsService.update({ id: itemId, ...item } as Item);
+    } else {
+      console.log('here');
+      await itemsService.create(item as Omit<Item, 'id'>);
+    }
+
+    if (isEditScreen) {
+      navigation.goBack();
+    } else {
+      resetForm();
+    }
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditScreen
@@ -104,11 +163,19 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
           className="gap-4 flex-1"
         >
           <FormField label={I18nAppText.t('name')}>
-            <Input value={item.name} />
+            <Input
+              onChangeText={(value) =>
+                handleChangeInput({ key: 'name', value })
+              }
+              value={item.name}
+            />
           </FormField>
           <View className="flex-row items-start justify-between gap-3">
             <FormField className="flex-1" label={I18nAppText.t('quantity')}>
               <Input
+                onChangeText={(value) =>
+                  handleChangeInput({ key: 'quantity', value })
+                }
                 value={String(item.quantity ?? 0)}
                 keyboardType="decimal-pad"
               />
@@ -132,7 +199,7 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
             <DatePickerInput
               value={item.dateAdded}
               onChangeDate={(value) =>
-                handleChangeDate({ key: 'dateAdded', value })
+                handleChangeInput({ key: 'dateAdded', value })
               }
             />
           </FormField>
@@ -140,7 +207,7 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
             <DatePickerInput
               value={item.expDate}
               onChangeDate={(value) =>
-                handleChangeDate({ key: 'expDate', value })
+                handleChangeInput({ key: 'expDate', value })
               }
             />
           </FormField>
@@ -149,6 +216,7 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
             onCheck={handleChangeIsPermanent}
             label={I18nAppText.t('shouldAlwaysBePresent')}
           />
+          <Button title={I18nAppText.t('save')} onPress={handleSaveItem} />
         </KeyboardAvoidingView>
       </ScrollView>
     </ScreenWrapper>
