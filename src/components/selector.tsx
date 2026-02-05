@@ -1,17 +1,14 @@
 import { ComponentProps, FC, Fragment, useState } from 'react';
 import { Pressable, View, ViewProps } from 'react-native';
 
+import { SelectorOption } from 'common/types';
+
 import { Divider } from './divider';
 import { Input } from './input';
 import { Text } from './text';
 
-type Option = {
-  key: number | string;
-  name: string;
-};
-
 type SelectorProps = {
-  options: Option[];
+  options: SelectorOption[];
   value: number | string | undefined | null;
   onSelect: (option: number | string) => void;
   inputProps?: ComponentProps<typeof Input>;
