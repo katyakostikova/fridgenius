@@ -1,20 +1,20 @@
-import { sql } from 'drizzle-orm';
+import { sql, relations } from 'drizzle-orm';
 import { int, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { UnitOfMeasurement } from 'common/enums';
 
 const categoriesTable = sqliteTable('categories', {
-  id: int().primaryKey({ autoIncrement: true }),
-  name: text().notNull().unique(),
+  id: int('id').primaryKey({ autoIncrement: true }),
+  name: text('name').notNull().unique(),
 });
 
 const itemsTable = sqliteTable('items', {
-  id: int().primaryKey({ autoIncrement: true }),
-  name: text().notNull().unique(),
-  dateAdded: text().default(sql`(CURRENT_DATE)`),
-  expDate: text(),
-  quantity: int(),
-  unitOfMeasure: text({
+  id: int('id').primaryKey({ autoIncrement: true }),
+  name: text('name').notNull().unique(),
+  dateAdded: text('date_added').default(sql`(CURRENT_DATE)`),
+  expDate: text('exp_date'),
+  quantity: int('quantity'),
+  unitOfMeasure: text('unit_of_measure', {
     enum: [
       UnitOfMeasurement.PIECE,
       UnitOfMeasurement.LITER,
@@ -23,8 +23,15 @@ const itemsTable = sqliteTable('items', {
       UnitOfMeasurement.KILOGRAM,
     ],
   }).notNull(),
-  isPermanent: int({ mode: 'boolean' }),
-  categoryId: int().references(() => categoriesTable.id),
+  isPermanent: int('is_permanent', { mode: 'boolean' }),
+  categoryId: int('category_id').references(() => categoriesTable.id),
 });
 
-export { categoriesTable, itemsTable };
+const itemsRelations = relations(itemsTable, ({ one }) => ({
+  category: one(categoriesTable, {
+    fields: [itemsTable.categoryId],
+    references: [categoriesTable.id],
+  }),
+}));
+
+export { categoriesTable, itemsTable, itemsRelations };
