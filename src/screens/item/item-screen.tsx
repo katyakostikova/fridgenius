@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { KeyboardAvoidingView, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native';
 
 import { UnitOfMeasurement } from 'common/enums';
-import { Item, ItemScreenProps, SelectorOption } from 'common/types';
+import { Item, ItemScreenProps, SelectorOption, ValueOf } from 'common/types';
 import {
   CheckBox,
   DatePickerInput,
@@ -24,6 +24,29 @@ const ITEM_INITIAL_VALUES: Partial<Item> = {
   unitOfMeasure: UnitOfMeasurement.PIECE,
 };
 
+const UNIT_OPTIONS = [
+  {
+    key: UnitOfMeasurement.PIECE,
+    name: I18nAppText.t('piece'),
+  },
+  {
+    key: UnitOfMeasurement.GRAM,
+    name: I18nAppText.t('gram'),
+  },
+  {
+    key: UnitOfMeasurement.KILOGRAM,
+    name: I18nAppText.t('kilogram'),
+  },
+  {
+    key: UnitOfMeasurement.LITER,
+    name: I18nAppText.t('liter'),
+  },
+  {
+    key: UnitOfMeasurement.MILLILITER,
+    name: I18nAppText.t('milliliter'),
+  },
+];
+
 const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   const { itemId } = route.params ?? {};
   const isEditScreen = !!itemId;
@@ -34,6 +57,13 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
 
   const handleChangeDate = ({ key, value }: { key: string; value: string }) => {
     setItem((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleChangeUnit = (unitOfMeasure: number | string) => {
+    setItem((prev) => ({
+      ...prev,
+      unitOfMeasure: unitOfMeasure as ValueOf<typeof UnitOfMeasurement>,
+    }));
   };
 
   const handleChangeCategory = (categoryId: number | string) => {
@@ -76,12 +106,21 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
           <FormField label={I18nAppText.t('name')}>
             <Input value={item.name} />
           </FormField>
-          <FormField label={I18nAppText.t('quantity')}>
-            <Input
-              value={String(item.quantity ?? 0)}
-              keyboardType="decimal-pad"
-            />
-          </FormField>
+          <View className="flex-row items-start justify-between gap-3">
+            <FormField className="flex-1" label={I18nAppText.t('quantity')}>
+              <Input
+                value={String(item.quantity ?? 0)}
+                keyboardType="decimal-pad"
+              />
+            </FormField>
+            <FormField className="flex-1" label={I18nAppText.t('unit')}>
+              <Selector
+                options={UNIT_OPTIONS}
+                value={item.unitOfMeasure}
+                onSelect={handleChangeUnit}
+              />
+            </FormField>
+          </View>
           <FormField label={I18nAppText.t('category')}>
             <Selector
               options={categoryOptions}

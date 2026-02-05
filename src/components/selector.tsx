@@ -2,6 +2,7 @@ import { ComponentProps, FC, Fragment, useState } from 'react';
 import { Pressable, View, ViewProps } from 'react-native';
 
 import { SelectorOption } from 'common/types';
+import { cn } from 'helpers';
 
 import { Divider } from './divider';
 import { Input } from './input';
@@ -36,7 +37,7 @@ const Selector: FC<SelectorProps> = ({
   };
 
   return (
-    <View className={className} {...props}>
+    <View className={cn('relative', className)} {...props}>
       <Input
         value={valueTitle}
         editable={false}
@@ -44,7 +45,7 @@ const Selector: FC<SelectorProps> = ({
         {...inputProps}
       />
       {areOptionsShown && (
-        <View className="p-4 border-x border-b rounded-b-sm border-neutral300 bg-neutral50 ">
+        <View className="absolute top-full left-0 right-0 p-4 border-x border-b rounded-b-sm border-neutral300 bg-neutral50 z-50">
           {options.map((item, index) => (
             <Fragment key={item.key}>
               <Pressable
