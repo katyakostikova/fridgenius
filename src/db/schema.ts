@@ -27,6 +27,10 @@ const itemsTable = sqliteTable('items', {
   categoryId: int('category_id').references(() => categoriesTable.id),
 });
 
+const categoriesRelations = relations(categoriesTable, ({ many }) => ({
+  items: many(itemsTable),
+}));
+
 const itemsRelations = relations(itemsTable, ({ one }) => ({
   category: one(categoriesTable, {
     fields: [itemsTable.categoryId],
@@ -34,4 +38,4 @@ const itemsRelations = relations(itemsTable, ({ one }) => ({
   }),
 }));
 
-export { categoriesTable, itemsTable, itemsRelations };
+export { categoriesTable, itemsTable, categoriesRelations, itemsRelations };

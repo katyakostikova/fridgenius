@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 
 import { Category } from 'common/types';
-import { categoriesTable } from 'db';
+import { categoriesTable, itemsTable } from 'db';
 
 import { db } from '../db/db';
 
@@ -31,6 +31,17 @@ class Categories {
       .set({ name })
       .where(eq(categoriesTable.id, id))
       .returning();
+  };
+
+  getAllWithItems = () => {
+    return db
+      .select({
+        id: categoriesTable.id,
+        name: categoriesTable.name,
+        items: itemsTable,
+      })
+      .from(categoriesTable)
+      .leftJoin(itemsTable, eq(categoriesTable.id, itemsTable.categoryId));
   };
 }
 

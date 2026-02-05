@@ -8,7 +8,9 @@ import { FabWithOptions, ScreenWrapper } from 'components';
 import { categoriesService, I18nAppText } from 'services';
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
-  const { data: categories } = useLiveQuery(categoriesService.getAll());
+  const { data: categories } = useLiveQuery(
+    categoriesService.getAllWithItems(),
+  );
 
   const handleNavigateToCategoryScreen = useCallback(
     (categoryId?: number) => {
