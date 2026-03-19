@@ -1,1 +1,6 @@
-export { categoriesTable, itemsTable, itemsRelations } from './schema';
+export {
+  categoriesTable,
+  categoriesRelations,
+  itemsTable,
+  itemsRelations,
+} from './schema';

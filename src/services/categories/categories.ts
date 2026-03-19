@@ -34,14 +34,10 @@ class Categories {
   };
 
   getAllWithItems = () => {
-    return db
-      .select({
-        id: categoriesTable.id,
-        name: categoriesTable.name,
-        items: itemsTable,
-      })
-      .from(categoriesTable)
-      .leftJoin(itemsTable, eq(categoriesTable.id, itemsTable.categoryId));
+    return db.query.categoriesTable.findMany({
+      columns: { id: true, name: true },
+      with: { items: true },
+    });
   };
 }
 

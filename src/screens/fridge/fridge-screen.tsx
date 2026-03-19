@@ -1,16 +1,30 @@
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { FC, useCallback, useMemo } from 'react';
-import { FlatList, Text } from 'react-native';
+import { SectionList } from 'react-native';
 
 import { ScreenName } from 'common/enums';
-import { FridgeScreenProps, IconName } from 'common/types';
-import { FabWithOptions, ScreenWrapper } from 'components';
+import { FridgeScreenProps, IconName, Item } from 'common/types';
+import { FabWithOptions, ScreenWrapper, Text } from 'components';
 import { categoriesService, I18nAppText } from 'services';
+
+type Section = {
+  id: number;
+  title: string;
+  data: Item[];
+};
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const { data: categories } = useLiveQuery(
     categoriesService.getAllWithItems(),
   );
+
+  const sections: Section[] = useMemo(() => {
+    return categories?.map((category) => ({
+      id: category.id,
+      title: category.name,
+      data: category.items,
+    }));
+  }, [categories]);
 
   const handleNavigateToCategoryScreen = useCallback(
     (categoryId?: number) => {
@@ -44,10 +58,11 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
 
   return (
     <ScreenWrapper>
-      <FlatList
-        data={categories}
+      <SectionList
+        sections={sections}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
       />
       <FabWithOptions
         options={fabOptions}
