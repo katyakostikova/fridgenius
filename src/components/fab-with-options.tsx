@@ -1,5 +1,6 @@
 import { ComponentProps, FC, Fragment, useState } from 'react';
 import { Pressable, View } from 'react-native';
+import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 
 import { AppColor } from 'common/enums';
 import { IconName } from 'common/types';
@@ -33,7 +34,11 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
   return (
     <View className={`items-end ${className ?? ''}`}>
       {areOptionsShown && (
-        <>
+        <Animated.View
+          entering={FadeInDown.duration(300)}
+          exiting={FadeOutDown.duration(300)}
+          className="items-end"
+        >
           <View className="p-4 border-2 rounded-lg border-secondary400 bg-secondary200 ">
             {options.map((item, index) => (
               <Fragment key={item.name}>
@@ -65,7 +70,7 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
             ))}
           </View>
           <View className="mr-[25px] h-0 w-0 bg-transparent mb-3 border-l-[10px] border-r-[10px] border-t-[10px] border-t-secondary400 border-l-transparent border-r-transparent" />
-        </>
+        </Animated.View>
       )}
       <Fab onPress={handleToggleOptions} {...props} />
     </View>
