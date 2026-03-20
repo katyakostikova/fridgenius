@@ -34,7 +34,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({
   }));
 
   return (
-    <Pressable onPress={onPress} className="flex-row items-center">
+    <Pressable onPress={onPress} className="flex-row items-center py-2">
       <Animated.View style={chevronStyle}>
         <Icon name="chevron-down" size={24} />
       </Animated.View>

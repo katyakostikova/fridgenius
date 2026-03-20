@@ -3,10 +3,11 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { SectionList } from 'react-native';
 
 import { ScreenName } from 'common/enums';
-import { FridgeScreenProps, IconName } from 'common/types';
-import { FabWithOptions, ScreenWrapper, Text } from 'components';
+import { FridgeScreenProps, IconName, Item } from 'common/types';
+import { FabWithOptions, ScreenWrapper } from 'components';
 import { categoriesService, I18nAppText } from 'services';
 
+import { ListItem } from './components/list-item';
 import { SectionHeader } from './components/section-header';
 import { getSectionListData } from './helpers';
 import { Section } from './types';
@@ -48,6 +49,17 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
     [expandedSectionIds, toggleSection],
   );
 
+  const renderItem = useCallback(
+    ({ item }: { item: Item }) => {
+      if (expandedSectionIds.has(item.categoryId ?? 0)) {
+        return <ListItem item={item} />;
+      }
+
+      return null;
+    },
+    [expandedSectionIds],
+  );
+
   const handleNavigateToCategoryScreen = useCallback(
     (categoryId?: number) => {
       navigation.navigate(ScreenName.CATEGORY_SCREEN, { categoryId });
@@ -83,7 +95,7 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
       <SectionList
         sections={sections}
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
       />
       <FabWithOptions
