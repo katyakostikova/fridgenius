@@ -1,10 +1,6 @@
-import { CategoryWithItems, Item } from 'common/types';
+import { CategoryWithItems } from 'common/types';
 
-type Section = {
-  id: number;
-  title: string;
-  data: Item[];
-};
+import { Section } from './types';
 
 const getSectionListData = (categories: CategoryWithItems[]): Section[] => {
   return categories.map((category) => ({

@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { SectionList } from 'react-native';
 
 import { ScreenName } from 'common/enums';
@@ -7,13 +7,46 @@ import { FridgeScreenProps, IconName } from 'common/types';
 import { FabWithOptions, ScreenWrapper, Text } from 'components';
 import { categoriesService, I18nAppText } from 'services';
 
+import { SectionHeader } from './components/section-header';
 import { getSectionListData } from './helpers';
+import { Section } from './types';
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const { data: categories } = useLiveQuery(
     categoriesService.getAllWithItems(),
   );
   const sections = useMemo(() => getSectionListData(categories), [categories]);
+
+  const [expandedSectionIds, setExpandedSectionIds] = useState<Set<number>>(
+    () => new Set(),
+  );
+
+  const toggleSection = useCallback((sectionId: number) => {
+    setExpandedSectionIds((prev) => {
+      const next = new Set(prev);
+
+      if (next.has(sectionId)) {
+        next.delete(sectionId);
+      } else {
+        next.add(sectionId);
+      }
+      return next;
+    });
+  }, []);
+
+  const renderSectionHeader = useCallback(
+    ({ section }: { section: Section }) => {
+      return (
+        <SectionHeader
+          title={section.title}
+          isExpanded={expandedSectionIds.has(section.id)}
+          data={section.data}
+          onPress={() => toggleSection(section.id)}
+        />
+      );
+    },
+    [expandedSectionIds, toggleSection],
+  );
 
   const handleNavigateToCategoryScreen = useCallback(
     (categoryId?: number) => {
@@ -51,7 +84,7 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
         sections={sections}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <Text>{item.name}</Text>}
-        renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+        renderSectionHeader={renderSectionHeader}
       />
       <FabWithOptions
         options={fabOptions}
