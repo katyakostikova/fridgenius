@@ -3,28 +3,17 @@ import { FC, useCallback, useMemo } from 'react';
 import { SectionList } from 'react-native';
 
 import { ScreenName } from 'common/enums';
-import { FridgeScreenProps, IconName, Item } from 'common/types';
+import { FridgeScreenProps, IconName } from 'common/types';
 import { FabWithOptions, ScreenWrapper, Text } from 'components';
 import { categoriesService, I18nAppText } from 'services';
 
-type Section = {
-  id: number;
-  title: string;
-  data: Item[];
-};
+import { getSectionListData } from './helpers';
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const { data: categories } = useLiveQuery(
     categoriesService.getAllWithItems(),
   );
-
-  const sections: Section[] = useMemo(() => {
-    return categories?.map((category) => ({
-      id: category.id,
-      title: category.name,
-      data: category.items,
-    }));
-  }, [categories]);
+  const sections = useMemo(() => getSectionListData(categories), [categories]);
 
   const handleNavigateToCategoryScreen = useCallback(
     (categoryId?: number) => {
