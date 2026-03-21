@@ -11,6 +11,7 @@ const variantStyles = tv({
       neutral50: 'color-neutral50',
       neutral600: 'color-neutral600',
       neutral700: 'color-neutral700',
+      neutralOn: 'color-neutralOn',
     },
     size: {
       sm: 'text-sm',

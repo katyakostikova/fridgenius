@@ -45,7 +45,7 @@ const Button: FC<ButtonProps> = ({
         return { ...base, color: 'secondary500' };
       case 'filled':
       default:
-        return { ...base, color: 'neutral50' };
+        return { ...base, color: 'neutralOn' };
     }
   }, [type]);
 

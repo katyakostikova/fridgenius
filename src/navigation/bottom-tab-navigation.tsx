@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppColor, ScreenName } from 'common/enums';
 import { BottomTabParamList } from 'common/types';
-import { Icon } from 'components';
 
 import { AssistantStack } from './assistant-stack';
+import { BottomTabItem } from './components/bottom-tab-item';
 import { DashboardStack } from './dashboard-stack';
 import { FridgeStack } from './fridge-stack';
 import { SettingsStack } from './settings-stack';
@@ -12,25 +13,45 @@ import { SettingsStack } from './settings-stack';
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabsNavigator = () => {
+  const insets = useSafeAreaInsets();
+  const tabBarHeight = 80 + insets.bottom;
+
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarLabel: () => null,
+        tabBarShowLabel: false,
         headerShown: false,
-        tabBarStyle: {
-          backgroundColor: AppColor.PRIMARY_500,
-          paddingTop: 8,
-        },
-        tabBarActiveTintColor: AppColor.NEUTRAL_50,
+        tabBarActiveTintColor: AppColor.PRIMARY_500,
         tabBarInactiveTintColor: AppColor.NEUTRAL_300,
+        tabBarStyle: {
+          backgroundColor: AppColor.NEUTRAL_25,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25,
+          overflow: 'hidden',
+          height: tabBarHeight,
+          paddingTop: 25,
+          paddingBottom: insets.bottom,
+          borderColor: 'transparent',
+        },
+        tabBarIconStyle: {
+          alignSelf: 'stretch',
+          width: '100%',
+          minHeight: 50,
+        },
       }}
     >
       <Tab.Screen
         name={ScreenName.DASHBOARD_STACK}
         component={DashboardStack}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="view-dashboard" color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <BottomTabItem
+              color={color}
+              focused={focused}
+              iconName="view-dashboard"
+              labelKey="bottomTabDashboard"
+              size={size}
+            />
           ),
         }}
       />
@@ -38,8 +59,14 @@ const BottomTabsNavigator = () => {
         name={ScreenName.FRIDGE_STACK}
         component={FridgeStack}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="fridge" color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <BottomTabItem
+              color={color}
+              focused={focused}
+              iconName="fridge"
+              labelKey="bottomTabFridge"
+              size={size}
+            />
           ),
         }}
       />
@@ -47,8 +74,14 @@ const BottomTabsNavigator = () => {
         name={ScreenName.ASSISTANT_STACK}
         component={AssistantStack}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="brain" color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <BottomTabItem
+              color={color}
+              focused={focused}
+              iconName="brain"
+              labelKey="bottomTabAssistant"
+              size={size}
+            />
           ),
         }}
       />
@@ -56,8 +89,14 @@ const BottomTabsNavigator = () => {
         name={ScreenName.SETTINGS_STACK}
         component={SettingsStack}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="cog" color={color} size={size} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <BottomTabItem
+              color={color}
+              focused={focused}
+              iconName="cog"
+              labelKey="bottomTabSettings"
+              size={size}
+            />
           ),
         }}
       />

@@ -10,7 +10,7 @@ const ScreenWrapper: FC<ScreenWrapperProps> = ({
 }) => {
   return (
     <View
-      className={`flex-1 bg-primary50 px-5 py-3 ${className ?? ''}`}
+      className={`flex-1 bg-primary25 px-5 py-3 ${className ?? ''}`}
       {...props}
     >
       {children}

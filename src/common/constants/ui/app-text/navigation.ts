@@ -1,4 +1,8 @@
 const NAVIGATION_TEXT_ENGLISH = {
+  bottomTabDashboard: 'Dashboard',
+  bottomTabFridge: 'Fridge',
+  bottomTabAssistant: 'Assistant',
+  bottomTabSettings: 'Settings',
   dashboardScreenName: 'Dashboard',
   fridgeScreenName: 'Fridge',
   assistantScreenName: 'Assistant',
@@ -10,6 +14,10 @@ const NAVIGATION_TEXT_ENGLISH = {
 };
 
 const NAVIGATION_TEXT_UKRAINIAN = {
+  bottomTabDashboard: 'Головна',
+  bottomTabFridge: 'Холодильник',
+  bottomTabAssistant: 'Асистент',
+  bottomTabSettings: 'Налаштування',
   dashboardScreenName: 'Головна',
   fridgeScreenName: 'Холодильник',
   assistantScreenName: 'Асистент',

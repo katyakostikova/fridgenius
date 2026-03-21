@@ -5,7 +5,7 @@ import { Text } from 'components';
 
 const DEFAULT_STACK_SCREEN_OPTIONS: NativeStackNavigationOptions = {
   headerTitle: ({ children }: { children: string }) => (
-    <Text variants={{ type: 'header', color: 'neutral50' }}>{children}</Text>
+    <Text variants={{ type: 'header', color: 'neutralOn' }}>{children}</Text>
   ),
   headerStyle: {
     backgroundColor: AppColor.PRIMARY_500,

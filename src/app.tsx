@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { getLocales } from 'expo-localization';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { BottomTabsNavigator } from 'navigation';
 import { db, expoDb, I18nAppText } from 'services';
@@ -35,8 +36,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <BottomTabsNavigator />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <BottomTabsNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }

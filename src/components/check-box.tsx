@@ -29,7 +29,7 @@ const CheckBox: FC<InputProps> = ({
           value ? 'bg-secondary500 active:bg-secondary600 border-0' : '',
         )}
       >
-        {value && <Icon name="check-bold" color={AppColor.NEUTRAL_50} />}
+        {value && <Icon name="check-bold" color={AppColor.NEUTRAL_ON} />}
       </Pressable>
       <Text variants={{ type: 'label' }}>{label}</Text>
     </View>
