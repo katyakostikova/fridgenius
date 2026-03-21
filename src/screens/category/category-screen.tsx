@@ -19,7 +19,7 @@ import {
   CATEGORY_FORM_ICONS,
   QUICK_SUGGESTION_KEYS,
 } from './constants';
-import { useCategoryForm } from './hooks/category-form';
+import { useCategoryForm } from './hooks/use-category-form';
 
 const CategoryScreen: FC<CategoryScreenProps> = ({ route, navigation }) => {
   const { categoryId } = route.params ?? {};
