@@ -77,14 +77,14 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   const fabOptions = useMemo(
     () => [
       {
-        name: I18nAppText.t('addCategory'),
-        iconName: 'format-list-bulleted' as IconName,
-        onPress: () => handleNavigateToCategoryScreen(),
+        name: I18nAppText.t('addItem'),
+        iconName: 'plus-circle' as IconName,
+        onPress: () => handleNavigateToItemScreen(),
       },
       {
-        name: I18nAppText.t('addItem'),
-        iconName: 'food-apple' as IconName,
-        onPress: () => handleNavigateToItemScreen(),
+        name: I18nAppText.t('addCategory'),
+        iconName: 'folder' as IconName,
+        onPress: () => handleNavigateToCategoryScreen(),
       },
     ],
     [handleNavigateToCategoryScreen, handleNavigateToItemScreen],

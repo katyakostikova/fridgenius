@@ -1,11 +1,16 @@
-import { ComponentProps, FC, Fragment, useState } from 'react';
-import { Pressable, View } from 'react-native';
-import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
+import { BlurView } from 'expo-blur';
+import { ComponentProps, FC, useState } from 'react';
+import { Pressable, StyleSheet, View } from 'react-native';
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeOut,
+  FadeOutDown,
+} from 'react-native-reanimated';
 
 import { AppColor } from 'common/enums';
 import { IconName } from 'common/types';
 
-import { Divider } from './divider';
 import { Fab } from './fab';
 import { Icon } from './icon';
 import { Text } from './text';
@@ -31,49 +36,72 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
     setAreOptionsShown((prev) => !prev);
   };
 
+  const handleOptionPress = (onPress: () => void) => {
+    setAreOptionsShown(false);
+    onPress();
+  };
+
   return (
-    <View className={`items-end ${className ?? ''}`}>
+    <>
       {areOptionsShown && (
         <Animated.View
-          entering={FadeInDown.duration(300)}
-          exiting={FadeOutDown.duration(300)}
-          className="items-end"
+          entering={FadeIn.duration(300)}
+          exiting={FadeOut.duration(300)}
+          className="absolute inset-0 z-10"
         >
-          <View className="p-4 border-2 rounded-lg border-secondary400 bg-secondary200 ">
-            {options.map((item, index) => (
-              <Fragment key={item.name}>
-                <Pressable
-                  key={item.name}
-                  onPress={item.onPress}
-                  className="flex-row items-center active:opacity-70 px-1"
-                >
-                  <Icon
-                    name={item.iconName}
-                    size={24}
-                    color={AppColor.NEUTRAL_600}
-                    className="mr-2"
-                  />
+          <BlurView
+            intensity={10}
+            tint="extraLight"
+            style={StyleSheet.absoluteFillObject}
+          />
+          <Pressable
+            className="absolute inset-0 bg-neutral900/15"
+            onPress={handleToggleOptions}
+          />
+        </Animated.View>
+      )}
+      <View className={`z-20 items-end ${className ?? ''}`}>
+        {areOptionsShown && (
+          <Animated.View
+            entering={FadeInDown.duration(300)}
+            exiting={FadeOutDown.duration(300)}
+            className="mb-3 items-end"
+          >
+            {options.map((item) => (
+              <Pressable
+                key={item.name}
+                onPress={() => handleOptionPress(item.onPress)}
+                className="mb-3 flex-row items-center active:opacity-90"
+              >
+                <View className="mr-3 rounded-full bg-neutralOn px-4 py-2.5 shadow-md">
                   <Text
                     variants={{
-                      color: 'neutral600',
+                      color: 'neutral800',
                       size: 'lg',
-                      weight: 'medium',
+                      weight: 'semiBold',
                     }}
                   >
                     {item.name}
                   </Text>
-                </Pressable>
-                {index !== options.length - 1 && (
-                  <Divider className="bg-neutral600 my-3" />
-                )}
-              </Fragment>
+                </View>
+                <View className="h-14 w-14 items-center justify-center rounded-[18px] bg-neutralOn shadow-md">
+                  <Icon
+                    name={item.iconName}
+                    size={30}
+                    color={AppColor.PRIMARY_500}
+                  />
+                </View>
+              </Pressable>
             ))}
-          </View>
-          <View className="mr-[25px] h-0 w-0 bg-transparent mb-3 border-l-[10px] border-r-[10px] border-t-[10px] border-t-secondary400 border-l-transparent border-r-transparent" />
-        </Animated.View>
-      )}
-      <Fab onPress={handleToggleOptions} {...props} />
-    </View>
+          </Animated.View>
+        )}
+        <Fab
+          isOpen={areOptionsShown}
+          onPress={handleToggleOptions}
+          {...props}
+        />
+      </View>
+    </>
   );
 };
 
