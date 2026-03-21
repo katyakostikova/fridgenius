@@ -1,5 +1,18 @@
 const LABELS_TEXT_ENGLISH = {
   category: 'Category',
+  categoryHelpIntro:
+    'Categories help you organize your fridge by grouping similar items like Dairy, Vegetables, or Snacks. This makes it easier to find what you need and track freshness.',
+  categoryName: 'Category name',
+  categoryNamePlaceholder: 'e.g. Fruits',
+  chooseIcon: 'Choose icon',
+  accentColor: 'Accent color',
+  quickSuggestions: 'Quick suggestions',
+  suggestionFruits: 'Fruits',
+  suggestionVegetables: 'Vegetables',
+  suggestionMeatFish: 'Meat & fish',
+  suggestionDairy: 'Dairy',
+  suggestionFrozen: 'Frozen',
+  saveCategory: 'Save category',
   name: 'Name',
   quantity: 'Quantity',
   dateAdded: 'Date added',
@@ -15,6 +28,19 @@ const LABELS_TEXT_ENGLISH = {
 
 const LABELS_TEXT_UKRAINIAN = {
   category: 'Категорія',
+  categoryHelpIntro:
+    'Категорії допомагають упорядкувати холодильник: наприклад, молочні продукти, овочі чи перекуси. Так легше знайти потрібне й стежити за свіжістю.',
+  categoryName: 'Назва категорії',
+  categoryNamePlaceholder: 'напр. Фрукти',
+  chooseIcon: 'Іконка',
+  accentColor: 'Колір акценту',
+  quickSuggestions: 'Швидкі підказки',
+  suggestionFruits: 'Фрукти',
+  suggestionVegetables: 'Овочі',
+  suggestionMeatFish: "М'ясо та риба",
+  suggestionDairy: 'Молочне',
+  suggestionFrozen: 'Заморозка',
+  saveCategory: 'Зберегти категорію',
   name: 'Назва',
   quantity: 'Кількість',
   dateAdded: 'Дата додавання',

@@ -13,6 +13,7 @@ type FormFieldProps = {
 const FormField: FC<FormFieldProps> = ({
   label,
   className,
+  error,
   children,
   ...props
 }) => {
@@ -20,6 +21,7 @@ const FormField: FC<FormFieldProps> = ({
     <View className={cn('gap-2', className)} {...props}>
       <Text variants={{ type: 'label' }}>{label}</Text>
       {children}
+      {!!error ? <Text variants={{ color: 'error' }}>{error}</Text> : null}
     </View>
   );
 };

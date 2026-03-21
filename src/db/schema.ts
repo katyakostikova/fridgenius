@@ -6,6 +6,8 @@ import { UnitOfMeasurement } from 'common/enums';
 const categoriesTable = sqliteTable('categories', {
   id: int('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull().unique(),
+  iconName: text('icon_name').notNull(),
+  color: text('color').notNull(),
 });
 
 const itemsTable = sqliteTable('items', {

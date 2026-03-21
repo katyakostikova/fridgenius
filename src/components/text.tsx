@@ -7,6 +7,7 @@ const variantStyles = tv({
     color: {
       neutral800: 'color-neutral800',
       error: 'color-error500',
+      primary500: 'color-primary500',
       secondary500: 'color-secondary500',
       neutral50: 'color-neutral50',
       neutral600: 'color-neutral600',
@@ -27,7 +28,7 @@ const variantStyles = tv({
     },
     type: {
       header: 'font-nunito-bold ios:text-xl android:text-2xl',
-      label: 'font-nunito-semi-bold text-lg',
+      label: 'font-nunito-bold text-sm uppercase tracking-wide',
     },
   },
   defaultVariants: {

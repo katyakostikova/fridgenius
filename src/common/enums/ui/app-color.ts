@@ -52,6 +52,8 @@ const AppColor = {
   NEUTRAL_ON: '#FFFFFF',
 
   ERROR_500: '#BA1A1A',
+  SUCCESS_500: '#2E7D32',
+  PURPLE_500: '#6A1B9A',
 };
 
 export { AppColor };

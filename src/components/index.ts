@@ -9,3 +9,4 @@ export { DatePickerInput } from './date-picker';
 export { CheckBox } from './check-box';
 export { Selector } from './selector';
 export { FormField } from './form-field';
+export { Pill } from './pill';

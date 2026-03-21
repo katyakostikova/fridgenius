@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 
 import { Category } from 'common/types';
-import { categoriesTable, itemsTable } from 'db';
+import { categoriesTable } from 'db';
 
 import { db } from '../db/db';
 
@@ -21,21 +21,24 @@ class Categories {
       .where(eq(categoriesTable.name, name));
   };
 
-  create = (name: string) => {
-    return db.insert(categoriesTable).values({ name }).returning();
+  create = ({ name, iconName, color }: Omit<Category, 'id'>) => {
+    return db
+      .insert(categoriesTable)
+      .values({ name, iconName, color })
+      .returning();
   };
 
-  update = ({ id, name }: Category) => {
+  update = ({ id, name, iconName, color }: Category) => {
     return db
       .update(categoriesTable)
-      .set({ name })
+      .set({ name, iconName, color })
       .where(eq(categoriesTable.id, id))
       .returning();
   };
 
   getAllWithItems = () => {
     return db.query.categoriesTable.findMany({
-      columns: { id: true, name: true },
+      columns: { id: true, name: true, iconName: true, color: true },
       with: { items: true },
     });
   };

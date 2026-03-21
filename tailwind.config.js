@@ -73,6 +73,8 @@ module.exports = {
         tertiaryOn: AppColor.TERTIARY_ON,
 
         error500: AppColor.ERROR_500,
+        success500: AppColor.SUCCESS_500,
+        purple500: AppColor.PURPLE_500,
 
         neutral25: AppColor.NEUTRAL_25,
         neutral50: AppColor.NEUTRAL_50,

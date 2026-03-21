@@ -7,13 +7,27 @@ import { cn } from 'helpers';
 import { Text } from './text';
 
 const variantStyles = tv({
-  base: 'border border-transparent rounded-md items-center justify-center px-4 py-3',
+  base: 'items-center justify-center rounded-xl border px-4 py-3 active:opacity-70',
   variants: {
-    type: {
-      filled: 'bg-secondary500 active:opacity-70',
-      outlined: 'border-secondary500 bg-neutral50 active:opacity-70',
-      ghost: 'bg-transparent active:opacity-70',
+    variant: {
+      filled: 'border-transparent',
+      outlined: 'border bg-neutral50',
+      ghost: 'border-transparent bg-transparent',
     },
+    color: {
+      primary: '',
+      secondary: '',
+    },
+  },
+  compoundVariants: [
+    { variant: 'filled', color: 'primary', class: 'bg-primary500' },
+    { variant: 'filled', color: 'secondary', class: 'bg-secondary500' },
+    { variant: 'outlined', color: 'primary', class: 'border-primary500' },
+    { variant: 'outlined', color: 'secondary', class: 'border-secondary500' },
+  ],
+  defaultVariants: {
+    variant: 'filled',
+    color: 'secondary',
   },
 });
 
@@ -21,13 +35,15 @@ type ButtonVariants = VariantProps<typeof variantStyles>;
 
 type ButtonProps = {
   title: string;
-  type?: ButtonVariants['type'];
+  variant?: ButtonVariants['variant'];
+  color?: ButtonVariants['color'];
 } & Omit<PressableProps, 'children'>;
 
 type TextVariant = ComponentProps<typeof Text>['variants'];
 
 const Button: FC<ButtonProps> = ({
-  type = 'filled',
+  variant = 'filled',
+  color = 'primary',
   className,
   title,
   ...props
@@ -38,19 +54,29 @@ const Button: FC<ButtonProps> = ({
       size: 'lg',
     };
 
-    switch (type) {
-      case 'outlined':
-        return { ...base, color: 'secondary500' };
-      case 'ghost':
-        return { ...base, color: 'secondary500' };
+    switch (variant) {
       case 'filled':
+        return { ...base, color: 'neutralOn' };
+      case 'outlined':
+      case 'ghost': {
+        switch (color) {
+          case 'primary':
+            return { ...base, color: 'primary500' };
+          case 'secondary':
+          default:
+            return { ...base, color: 'secondary500' };
+        }
+      }
       default:
         return { ...base, color: 'neutralOn' };
     }
-  }, [type]);
+  }, [variant, color]);
 
   return (
-    <Pressable className={cn(variantStyles({ type }), className)} {...props}>
+    <Pressable
+      className={cn(variantStyles({ variant, color }), className)}
+      {...props}
+    >
       <Text variants={textVariants}>{title}</Text>
     </Pressable>
   );
