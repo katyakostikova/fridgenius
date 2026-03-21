@@ -67,7 +67,7 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
                 onPress={() => handleOptionPress(item.onPress)}
                 className="mb-3 flex-row items-center active:opacity-90"
               >
-                <View className="mr-3 rounded-full bg-neutralOn px-4 py-2.5 shadow-md">
+                <View className="mr-3 rounded-[15px] bg-neutralOn px-4 py-2.5 shadow-md">
                   <Text
                     variants={{
                       color: 'neutral800',
@@ -78,7 +78,7 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
                     {item.name}
                   </Text>
                 </View>
-                <View className="h-14 w-14 items-center justify-center rounded-[18px] bg-neutralOn shadow-md">
+                <View className="h-14 w-14 items-center justify-center rounded-[15px] bg-neutralOn shadow-md">
                   <Icon
                     name={item.iconName}
                     size={30}
