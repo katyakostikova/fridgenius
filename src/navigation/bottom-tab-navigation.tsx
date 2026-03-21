@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomTabsNavigator = () => {
   const insets = useSafeAreaInsets();
-  const tabBarHeight = 80 + insets.bottom;
+  const tabBarHeight = 60 + insets.bottom;
 
   return (
     <Tab.Navigator
@@ -25,11 +25,9 @@ const BottomTabsNavigator = () => {
         tabBarInactiveTintColor: AppColor.NEUTRAL_300,
         tabBarStyle: {
           backgroundColor: AppColor.NEUTRAL_25,
-          borderTopLeftRadius: 25,
-          borderTopRightRadius: 25,
           overflow: 'hidden',
           height: tabBarHeight,
-          paddingTop: 25,
+          paddingTop: 10,
           paddingBottom: insets.bottom,
           borderColor: 'transparent',
         },
