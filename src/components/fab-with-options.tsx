@@ -1,12 +1,7 @@
 import { BlurView } from 'expo-blur';
 import { ComponentProps, FC, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import Animated, {
-  FadeIn,
-  FadeInDown,
-  FadeOut,
-  FadeOutDown,
-} from 'react-native-reanimated';
+import Animated, { FadeIn, FadeInDown, FadeOut } from 'react-native-reanimated';
 
 import { AppColor } from 'common/enums';
 import { IconName } from 'common/types';
@@ -64,7 +59,6 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
         {areOptionsShown && (
           <Animated.View
             entering={FadeInDown.duration(300)}
-            exiting={FadeOutDown.duration(300)}
             className="mb-3 items-end"
           >
             {options.map((item) => (
