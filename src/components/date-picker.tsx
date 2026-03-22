@@ -3,10 +3,12 @@ import DateTimePicker, {
 } from '@react-native-community/datetimepicker';
 import dayjs from 'dayjs';
 import { FC, useState } from 'react';
-import { TextInputProps } from 'react-native';
+import { Pressable, TextInputProps } from 'react-native';
 
-import { DateFormat } from 'common/enums';
+import { AppColor, DateFormat } from 'common/enums';
+import { cn } from 'helpers';
 
+import { Icon } from './icon';
 import { Input } from './input';
 
 type InputProps = {
@@ -39,12 +41,27 @@ const DatePickerInput: FC<InputProps> = ({
   // TODO: fix app crash
   return (
     <>
-      <Input
-        value={value ?? undefined}
-        editable={false}
+      <Pressable
         onPress={handleOpenPicker}
-        {...props}
-      />
+        className={cn(
+          'flex-row items-center rounded-xl border border-neutral100/60 bg-neutralOn active:opacity-90',
+          className,
+        )}
+      >
+        <Input
+          className="min-h-[52px] flex-1 border-0 bg-transparent py-4"
+          value={value ?? ''}
+          editable={false}
+          pointerEvents="none"
+          {...props}
+        />
+        <Icon
+          name="calendar-month-outline"
+          color={AppColor.NEUTRAL_600}
+          size={22}
+          className="pr-4"
+        />
+      </Pressable>
       {isPickerShown && (
         <DateTimePicker
           testID="dateTimePicker"

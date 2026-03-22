@@ -48,8 +48,8 @@ const useItemForm = ({ itemId }: ItemFormProps) => {
     setItem((prev) => ({ ...prev, categoryId: +categoryId }));
   };
 
-  const handleChangeIsPermanent = () => {
-    setItem((prev) => ({ ...prev, isPermanent: !prev.isPermanent }));
+  const handleChangeIsPermanent = (isPermanent: boolean) => {
+    setItem((prev) => ({ ...prev, isPermanent }));
   };
 
   const handleGetAllCategories = useCallback(async () => {
