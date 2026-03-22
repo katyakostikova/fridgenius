@@ -39,6 +39,16 @@ const LABELS_TEXT_ENGLISH = {
   fridgeExpBadgeToday: 'Today',
   fridgeExpBadgeTomorrow: 'Tomorrow',
   fridgeExpBadgeInDays: 'In %{count} days',
+  fridgeDateAddedToday: 'Today',
+  fridgeDateAddedYesterday: 'Yesterday',
+  fridgeDateAddedDaysAgo: '%{count} days ago',
+  fridgeDateAddedOneWeekAgo: '1 week ago',
+  fridgeDateAddedWeeksAgo: '%{count} weeks ago',
+  fridgeDateAddedOneMonthAgo: '1 month ago',
+  fridgeDateAddedMonthsAgo: '%{count} months ago',
+  fridgeDateAddedOneYearAgo: '1 year ago',
+  fridgeDateAddedYearsAgo: '%{count} years ago',
+  fridgeItemPermanentBadge: 'Permanent',
 };
 
 const LABELS_TEXT_UKRAINIAN = {
@@ -83,6 +93,16 @@ const LABELS_TEXT_UKRAINIAN = {
   fridgeExpBadgeToday: 'Сьогодні',
   fridgeExpBadgeTomorrow: 'Завтра',
   fridgeExpBadgeInDays: 'Через %{count} дн',
+  fridgeDateAddedToday: 'Сьогодні',
+  fridgeDateAddedYesterday: 'Вчора',
+  fridgeDateAddedDaysAgo: '%{count} дн. тому',
+  fridgeDateAddedOneWeekAgo: '1 тиждень тому',
+  fridgeDateAddedWeeksAgo: '%{count} тиж. тому',
+  fridgeDateAddedOneMonthAgo: '1 місяць тому',
+  fridgeDateAddedMonthsAgo: '%{count} міс. тому',
+  fridgeDateAddedOneYearAgo: '1 рік тому',
+  fridgeDateAddedYearsAgo: '%{count} р. тому',
+  fridgeItemPermanentBadge: 'Постійно',
 };
 
 export { LABELS_TEXT_ENGLISH, LABELS_TEXT_UKRAINIAN };

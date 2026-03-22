@@ -34,11 +34,11 @@ const Fab: FC<FabProps> = ({
   return (
     <Pressable
       onPress={onPress}
-      className={`h-20 w-20 items-center justify-center rounded-[20px] bg-secondary500 shadow-md active:opacity-70 ${className ?? ''}`}
+      className={`h-16 w-16 items-center justify-center rounded-[16px] bg-primary500 shadow-md active:opacity-70 ${className ?? ''}`}
       {...props}
     >
       <Animated.View style={iconStyle}>
-        <Icon name="plus" color={AppColor.NEUTRAL_ON} size={35} />
+        <Icon name="plus" color={AppColor.NEUTRAL_ON} size={30} />
       </Animated.View>
     </Pressable>
   );

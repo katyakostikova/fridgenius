@@ -91,4 +91,49 @@ const getExpirationStatusStyle = (expDate: string | null | undefined) => {
   };
 };
 
-export { getExpirationStatusStyle, getSectionListData };
+const getDateAddedLabel = (
+  dateAdded: string | null | undefined,
+): string | null => {
+  if (!dateAdded) {
+    return null;
+  }
+
+  const parsed = dayjs(dateAdded, DateFormat.DATE_ONLY);
+
+  const today = dayjs().startOf('day');
+  const startOfDay = parsed.startOf('day');
+  const diffDays = today.diff(startOfDay, 'day');
+
+  switch (true) {
+    case diffDays <= 0:
+      return I18nAppText.t('fridgeDateAddedToday');
+    case diffDays === 1:
+      return I18nAppText.t('fridgeDateAddedYesterday');
+    case diffDays < 7:
+      return I18nAppText.t('fridgeDateAddedDaysAgo', { count: diffDays });
+    case diffDays < 30: {
+      const weeks = Math.floor(diffDays / 7);
+
+      return weeks === 1
+        ? I18nAppText.t('fridgeDateAddedOneWeekAgo')
+        : I18nAppText.t('fridgeDateAddedWeeksAgo', { count: weeks });
+    }
+    case diffDays < 365: {
+      const months = today.diff(startOfDay, 'month');
+      const monthCount = Math.max(1, months);
+
+      return monthCount === 1
+        ? I18nAppText.t('fridgeDateAddedOneMonthAgo')
+        : I18nAppText.t('fridgeDateAddedMonthsAgo', { count: monthCount });
+    }
+    default: {
+      const years = today.diff(startOfDay, 'year');
+
+      return years === 1
+        ? I18nAppText.t('fridgeDateAddedOneYearAgo')
+        : I18nAppText.t('fridgeDateAddedYearsAgo', { count: years });
+    }
+  }
+};
+
+export { getDateAddedLabel, getExpirationStatusStyle, getSectionListData };
