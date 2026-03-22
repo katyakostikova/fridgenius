@@ -34,7 +34,9 @@ const LabeledSwitch: FC<LabeledSwitchProps> = ({
           </Text>
         ) : null}
       </View>
-      <Switch value={!!value} onValueChange={onValueChange} />
+      <View className="shrink-0">
+        <Switch value={!!value} onValueChange={onValueChange} />
+      </View>
     </View>
   );
 };
