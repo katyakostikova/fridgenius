@@ -6,11 +6,13 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Item } from 'common/types';
+import { IconName, Item } from 'common/types';
 import { Text, Icon } from 'components';
 
 type SectionHeaderProps = {
   title: string;
+  iconName: string;
+  color: string;
   isExpanded: boolean;
   data: Item[];
   onPress: () => void;
@@ -18,6 +20,8 @@ type SectionHeaderProps = {
 
 const SectionHeader: FC<SectionHeaderProps> = ({
   title,
+  iconName,
+  color,
   isExpanded,
   data,
   onPress,
@@ -35,15 +39,26 @@ const SectionHeader: FC<SectionHeaderProps> = ({
 
   return (
     <Pressable onPress={onPress} className="flex-row items-center py-2">
+      <Icon
+        name={iconName as IconName}
+        size={25}
+        color={color}
+        className="mr-2"
+      />
+      <Text
+        variants={{ size: 'lg', weight: 'extraBold' }}
+        className="flex-1 uppercase tracking-wide"
+        style={{ color }}
+        numberOfLines={1}
+      >
+        {title}
+      </Text>
+      <Text variants={{ size: 'lg', weight: 'medium' }} className="mr-2">
+        ({amountOfItems})
+      </Text>
       <Animated.View style={chevronStyle}>
         <Icon name="chevron-down" size={24} />
       </Animated.View>
-      <Text variants={{ size: 'lg', weight: 'medium' }} className="ml-2">
-        {title}
-      </Text>
-      <Text variants={{ size: 'lg', weight: 'medium' }} className="ml-2">
-        ({amountOfItems})
-      </Text>
     </Pressable>
   );
 };

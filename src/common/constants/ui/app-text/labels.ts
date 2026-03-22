@@ -32,6 +32,13 @@ const LABELS_TEXT_ENGLISH = {
   kilogram: 'Kilogram',
   liter: 'Liter',
   milliliter: 'Milliliter',
+  fridgeExpLabelExpires: 'Expires',
+  fridgeExpLabelWarning: 'Warning',
+  fridgeExpLabelCritical: 'Critical',
+  fridgeExpLabelExpired: 'Expired',
+  fridgeExpBadgeToday: 'Today',
+  fridgeExpBadgeTomorrow: 'Tomorrow',
+  fridgeExpBadgeInDays: 'In %{count} days',
 };
 
 const LABELS_TEXT_UKRAINIAN = {
@@ -69,6 +76,13 @@ const LABELS_TEXT_UKRAINIAN = {
   kilogram: 'Кілограм',
   liter: 'Літр',
   milliliter: 'Мілілітр',
+  fridgeExpLabelExpires: 'Термін',
+  fridgeExpLabelWarning: 'Увага',
+  fridgeExpLabelCritical: 'Критично',
+  fridgeExpLabelExpired: 'Прострочено',
+  fridgeExpBadgeToday: 'Сьогодні',
+  fridgeExpBadgeTomorrow: 'Завтра',
+  fridgeExpBadgeInDays: 'Через %{count} дн',
 };
 
 export { LABELS_TEXT_ENGLISH, LABELS_TEXT_UKRAINIAN };

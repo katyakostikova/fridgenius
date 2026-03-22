@@ -1,18 +1,19 @@
 import { FC } from 'react';
 import { Text as RNText, TextProps as RNTextProps } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 import { tv, VariantProps } from 'tailwind-variants';
 
 const variantStyles = tv({
   variants: {
     color: {
-      neutral800: 'color-neutral800',
-      error: 'color-error500',
-      primary500: 'color-primary500',
-      secondary500: 'color-secondary500',
-      neutral50: 'color-neutral50',
-      neutral600: 'color-neutral600',
-      neutral700: 'color-neutral700',
-      neutralOn: 'color-neutralOn',
+      neutral800: 'text-neutral800',
+      error: 'text-error500',
+      primary500: 'text-primary500',
+      secondary500: 'text-secondary500',
+      neutral50: 'text-neutral50',
+      neutral600: 'text-neutral600',
+      neutral700: 'text-neutral700',
+      neutralOn: 'text-neutralOn',
     },
     size: {
       sm: 'text-sm',
@@ -26,6 +27,7 @@ const variantStyles = tv({
       medium: 'font-nunito-medium',
       semiBold: 'font-nunito-semi-bold',
       bold: 'font-nunito-bold',
+      extraBold: 'font-nunito-extra-bold',
     },
     type: {
       header: 'font-nunito-bold ios:text-xl android:text-2xl',
@@ -45,10 +47,7 @@ type TextProps = { variants?: TextVariants } & RNTextProps;
 
 const Text: FC<TextProps> = ({ variants, className, children, ...props }) => {
   return (
-    <RNText
-      className={`${variantStyles(variants)} ${className ?? ''}`}
-      {...props}
-    >
+    <RNText className={twMerge(variantStyles(variants), className)} {...props}>
       {children}
     </RNText>
   );

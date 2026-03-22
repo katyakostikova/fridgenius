@@ -43,6 +43,8 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
       return (
         <SectionHeader
           title={section.title}
+          iconName={section.iconName}
+          color={section.color}
           isExpanded={expandedSectionIds.has(section.id)}
           data={section.data}
           onPress={() => toggleSection(section.id)}
@@ -100,6 +102,8 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
         keyExtractor={(item) => String(item.id)}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
+        showsVerticalScrollIndicator={false}
+        stickySectionHeadersEnabled={false}
       />
       <FabWithOptions
         options={fabOptions}

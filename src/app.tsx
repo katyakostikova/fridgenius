@@ -4,6 +4,7 @@ import {
   Nunito_500Medium,
   Nunito_600SemiBold,
   Nunito_700Bold,
+  Nunito_800ExtraBold,
 } from '@expo-google-fonts/nunito';
 import { NavigationContainer } from '@react-navigation/native';
 import dayjs from 'dayjs';
@@ -31,6 +32,7 @@ export default function App() {
     Nunito_500Medium,
     Nunito_600SemiBold,
     Nunito_700Bold,
+    Nunito_800ExtraBold,
   });
 
   // TODO: add splash screen

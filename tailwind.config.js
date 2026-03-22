@@ -31,6 +31,10 @@ module.exports = {
           ios: 'Nunito-Bold',
           android: 'Nunito_700Bold',
         }),
+        'nunito-extra-bold': platformSelect({
+          ios: 'Nunito-ExtraBold',
+          android: 'Nunito_800ExtraBold',
+        }),
       },
       colors: {
         primary25: AppColor.PRIMARY_25,
