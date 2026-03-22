@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { SectionList } from 'react-native';
@@ -13,8 +14,10 @@ import { getSectionListData } from './helpers';
 import { Section } from './types';
 
 const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const { data: categories } = useLiveQuery(
     categoriesService.getAllWithItems(),
+    [isFocused],
   );
   const sections = useMemo(() => getSectionListData(categories), [categories]);
 
