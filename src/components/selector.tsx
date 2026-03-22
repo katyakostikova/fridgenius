@@ -1,4 +1,11 @@
-import { ComponentProps, FC, useEffect, useRef, useState } from 'react';
+import {
+  ComponentProps,
+  FC,
+  Fragment,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Modal,
   Pressable,
@@ -148,7 +155,7 @@ const Selector: FC<SelectorProps> = ({
                 bounces={false}
               >
                 {options.map((item, index) => (
-                  <>
+                  <Fragment key={item.key}>
                     <Pressable
                       onPress={() => handleSelect(item.key)}
                       className="active:bg-neutral50 px-3 py-3.5"
@@ -165,7 +172,7 @@ const Selector: FC<SelectorProps> = ({
                     {index !== options.length - 1 ? (
                       <Divider className="mx-3 h-px bg-neutral100/80" />
                     ) : null}
-                  </>
+                  </Fragment>
                 ))}
               </ScrollView>
             </Animated.View>
