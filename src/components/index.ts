@@ -5,6 +5,7 @@ export { ScreenWrapper } from './screen-wrapper';
 export { Input } from './input';
 export { Button } from './button';
 export { FabWithOptions } from './fab-with-options';
+export { Modal } from './modal';
 export { DatePickerInput } from './date-picker';
 export { LabeledSwitch } from './labeled-switch';
 export { Switch } from './switch';

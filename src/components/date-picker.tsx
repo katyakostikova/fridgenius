@@ -3,18 +3,26 @@ import DateTimePicker, {
 } from '@react-native-community/datetimepicker';
 import dayjs from 'dayjs';
 import { FC, useState } from 'react';
-import { Pressable, TextInputProps } from 'react-native';
+import { Platform, Pressable, TextInputProps, View } from 'react-native';
 
 import { AppColor, DateFormat } from 'common/enums';
 import { cn } from 'helpers';
 
+import { Button } from './button';
 import { Icon } from './icon';
 import { Input } from './input';
+import { Modal } from './modal';
 
 type InputProps = {
   value: string | null | undefined;
   onChangeDate: (value: string) => void;
 } & Omit<TextInputProps, 'value'>;
+
+const parseStoredDate = (stored: string | null | undefined): Date => {
+  const parsed = dayjs(stored, DateFormat.DATE_ONLY, true);
+
+  return parsed.isValid() ? parsed.toDate() : new Date();
+};
 
 const DatePickerInput: FC<InputProps> = ({
   onChangeDate,
@@ -23,22 +31,33 @@ const DatePickerInput: FC<InputProps> = ({
   ...props
 }) => {
   const [isPickerShown, setIsPickerShown] = useState(false);
+  const [draftDate, setDraftDate] = useState(() => new Date());
 
   const handleOpenPicker = () => {
+    setDraftDate(parseStoredDate(value));
     setIsPickerShown(true);
   };
 
-  const handleClosePicker = () => {
+  const handleCancel = () => {
     setIsPickerShown(false);
   };
 
-  const handleChangeDate = (e: DateTimePickerEvent) => {
-    onChangeDate(dayjs(e.nativeEvent.timestamp).format(DateFormat.DATE_ONLY));
-    handleClosePicker();
+  const handleConfirm = () => {
+    onChangeDate(dayjs(draftDate).format(DateFormat.DATE_ONLY));
+    setIsPickerShown(false);
   };
 
-  // TODO: show picker modal
-  // TODO: fix app crash
+  const handleChangeDate = (event: DateTimePickerEvent, date?: Date) => {
+    if (event.type === 'dismissed') {
+      handleCancel();
+      return;
+    }
+
+    if (date) {
+      setDraftDate(date);
+    }
+  };
+
   return (
     <>
       <Pressable
@@ -62,19 +81,47 @@ const DatePickerInput: FC<InputProps> = ({
           className="pr-4"
         />
       </Pressable>
-      {isPickerShown && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={
-            value
-              ? new Date(dayjs(value, DateFormat.DATE_ONLY).toISOString())
-              : new Date()
-          }
-          mode="date"
-          onChange={handleChangeDate}
-          display="inline"
-        />
-      )}
+      <Modal
+        visible={isPickerShown}
+        onClose={handleCancel}
+        backdropAccessibilityLabel="Close date picker"
+      >
+        <View className="w-full max-w-[360px] rounded-[36px] bg-neutralOn">
+          <View className="p-3">
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={draftDate}
+              mode="date"
+              display={Platform.select({
+                ios: 'inline',
+                android: 'calendar',
+                default: 'inline',
+              })}
+              onChange={handleChangeDate}
+              themeVariant="light"
+              accentColor={AppColor.PRIMARY_500}
+              textColor={AppColor.NEUTRAL_800}
+            />
+          </View>
+          <View className="flex-row border-t border-neutral50">
+            <Button
+              title="Cancel"
+              variant="ghost"
+              color="neutral"
+              onPress={handleCancel}
+              className="flex-1 py-4"
+            />
+            <View className="w-px bg-neutral50" />
+            <Button
+              title="Confirm"
+              variant="ghost"
+              color="primary"
+              onPress={handleConfirm}
+              className="flex-1 py-4"
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };

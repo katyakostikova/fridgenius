@@ -6,6 +6,8 @@ import {
   Nunito_700Bold,
 } from '@expo-google-fonts/nunito';
 import { NavigationContainer } from '@react-navigation/native';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { getLocales } from 'expo-localization';
@@ -17,6 +19,7 @@ import { db, expoDb, I18nAppText } from 'services';
 import migrations from './drizzle/migrations';
 
 I18nAppText.locale = getLocales()[0].languageCode ?? 'en';
+dayjs.extend(customParseFormat);
 
 export default function App() {
   useDrizzleStudio(expoDb);

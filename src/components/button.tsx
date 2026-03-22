@@ -17,13 +17,16 @@ const variantStyles = tv({
     color: {
       primary: '',
       secondary: '',
+      neutral: '',
     },
   },
   compoundVariants: [
     { variant: 'filled', color: 'primary', class: 'bg-primary500' },
     { variant: 'filled', color: 'secondary', class: 'bg-secondary500' },
+    { variant: 'filled', color: 'neutral', class: 'bg-neutral600' },
     { variant: 'outlined', color: 'primary', class: 'border-primary500' },
     { variant: 'outlined', color: 'secondary', class: 'border-secondary500' },
+    { variant: 'outlined', color: 'neutral', class: 'border-neutral600' },
   ],
   defaultVariants: {
     variant: 'filled',
@@ -62,6 +65,8 @@ const Button: FC<ButtonProps> = ({
         switch (color) {
           case 'primary':
             return { ...base, color: 'primary500' };
+          case 'neutral':
+            return { ...base, color: 'neutral600' };
           case 'secondary':
           default:
             return { ...base, color: 'secondary500' };
