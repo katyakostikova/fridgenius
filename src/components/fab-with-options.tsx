@@ -45,8 +45,8 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
           className="absolute inset-0 z-10"
         >
           <BlurView
-            intensity={10}
-            tint="extraLight"
+            intensity={15}
+            tint="light"
             style={StyleSheet.absoluteFillObject}
           />
           <Pressable
@@ -82,7 +82,7 @@ const FabWithOptions: FC<FabWithOptionsProps> = ({
                   <Icon
                     name={item.iconName}
                     size={30}
-                    color={AppColor.PRIMARY_500}
+                    color={AppColor.SECONDARY_500}
                   />
                 </View>
               </Pressable>
