@@ -10,6 +10,7 @@ import {
   LabeledSwitch,
   ScreenWrapper,
   Selector,
+  TempQuantityInput,
   Text,
 } from 'components';
 import { checkIsIos } from 'helpers';
@@ -17,6 +18,8 @@ import { I18nAppText } from 'services';
 
 import { UNIT_OPTIONS } from './constants';
 import { useItemForm } from './hooks/use-item-form';
+
+const IS_TEMP_QUANTITY_ENABLED = true;
 
 const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
   const { itemId } = route.params ?? {};
@@ -76,16 +79,25 @@ const ItemScreen: FC<ItemScreenProps> = ({ route, navigation }) => {
                 placeholder={I18nAppText.t('itemNamePlaceholder')}
               />
             </FormField>
-            <FormField label={I18nAppText.t('quantity')}>
-              <Input
-                onChangeText={(value) =>
-                  handleChangeInput({ key: 'quantity', value })
+            {!IS_TEMP_QUANTITY_ENABLED ? (
+              <FormField label={I18nAppText.t('quantity')}>
+                <Input
+                  onChangeText={(value) =>
+                    handleChangeInput({ key: 'quantity', value })
+                  }
+                  value={String(item.quantity ?? 0)}
+                  keyboardType="decimal-pad"
+                  placeholder={I18nAppText.t('itemQuantityPlaceholder')}
+                />
+              </FormField>
+            ) : (
+              <TempQuantityInput
+                currentQuantity={Number(item.quantity) || 0}
+                onResultingQuantityChange={(value) =>
+                  handleChangeInput({ key: 'quantity', value: String(value) })
                 }
-                value={String(item.quantity ?? 0)}
-                keyboardType="decimal-pad"
-                placeholder={I18nAppText.t('itemQuantityPlaceholder')}
               />
-            </FormField>
+            )}
             <FormField label={I18nAppText.t('unit')}>
               <Selector
                 options={UNIT_OPTIONS}

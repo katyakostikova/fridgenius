@@ -14,6 +14,7 @@ const variantStyles = tv({
       neutral600: 'text-neutral600',
       neutral700: 'text-neutral700',
       neutralOn: 'text-neutralOn',
+      success: 'text-success500',
     },
     size: {
       sm: 'text-sm',

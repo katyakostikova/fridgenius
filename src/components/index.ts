@@ -12,3 +12,4 @@ export { Switch } from './switch';
 export { Selector } from './selector';
 export { FormField } from './form-field';
 export { Pill } from './pill';
+export { TempQuantityInput } from './temp-quantity-input';
