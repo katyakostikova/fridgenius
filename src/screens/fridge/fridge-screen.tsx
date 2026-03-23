@@ -21,12 +21,12 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
   );
   const sections = useMemo(() => getSectionListData(categories), [categories]);
 
-  const [expandedSectionIds, setExpandedSectionIds] = useState<Set<number>>(
+  const [hiddenSectionIds, setHiddenSectionIds] = useState<Set<number>>(
     () => new Set(),
   );
 
   const toggleSection = useCallback((sectionId: number) => {
-    setExpandedSectionIds((prev) => {
+    setHiddenSectionIds((prev) => {
       const next = new Set(prev);
 
       if (next.has(sectionId)) {
@@ -45,24 +45,24 @@ const FridgeScreen: FC<FridgeScreenProps> = ({ navigation }) => {
           title={section.title}
           iconName={section.iconName}
           color={section.color}
-          isExpanded={expandedSectionIds.has(section.id)}
+          isExpanded={!hiddenSectionIds.has(section.id)}
           data={section.data}
           onPress={() => toggleSection(section.id)}
         />
       );
     },
-    [expandedSectionIds, toggleSection],
+    [hiddenSectionIds, toggleSection],
   );
 
   const renderItem = useCallback(
     ({ item }: { item: Item }) => {
-      if (expandedSectionIds.has(item.categoryId ?? 0)) {
+      if (!hiddenSectionIds.has(item.categoryId ?? 0)) {
         return <ListItem item={item} />;
       }
 
       return null;
     },
-    [expandedSectionIds],
+    [hiddenSectionIds],
   );
 
   const handleNavigateToCategoryScreen = useCallback(
